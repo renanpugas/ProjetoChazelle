@@ -9,7 +9,7 @@ O projeto Chazelle é um sistema para gerenciamento de chatbots
 
 # Instalação
 
-Primeiramente as depedências do projeto devem ser instaladas
+Primeiramente as depedências do projeto devem ser instaladas dentro da pasta onde o mesmo se encontra
 
 ```
 npm install
