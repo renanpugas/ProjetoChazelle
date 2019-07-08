@@ -1,2 +1,5 @@
 #28-06
 - Criacao do Projeto
+
+#08-07
+- Integração do Banco de Dados com o projeto
