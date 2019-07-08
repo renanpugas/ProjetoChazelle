@@ -1,4 +1,4 @@
-# ProjetoChazelle
+# Projeto Chazelle
 
 O projeto Chazelle é um sistema para gerenciamento de chatbots
 
