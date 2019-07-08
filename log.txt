@@ -3,3 +3,5 @@
 
 #08-07
 - Integração do Banco de Dados com o projeto
+- Criação de algumas classes model
+- Criação de algumas rotas
