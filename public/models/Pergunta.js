@@ -1,31 +1,27 @@
 class Pergunta{
 
-    // construct(database){}
+    construct(database){}
 
-    // getEmpresa()
-    // static getAllPerguntas(database, nameEmpresa)
+    getEmpresa(){}
+    static getAllPerguntas(database, nameEmpresa){}
 
-    static save(db){
+    static save(db, data){
 
-        // return new Promise((resolve, reject)=>{
-        //     db.database().collection("users").add({
-        //         first: "Alan",
-        //         middle: "Mathison",
-        //         last: "Turing",
-        //         born: 1912
-        //       })
-        //       .then(function(docRef) {
-        //           resolve("Document written with ID: ", docRef.id);
-        //       })
-        //       .catch(function(error) {
-        //           reject("Error adding document: ", error);
-        //       });
-        // });
+        return new Promise((resolve, reject)=>{
+            
+            db.database().collection("Funcionarios").add(data)
+            .then(result =>{
+                resolve("Dados adicionados");
+            })
+            .catch(error =>{
+                reject(error);
+            })
+        });
 
     }
 
-    // update()
-    // delete()
+    update(){}
+    delete(){}
 
 }
 
