@@ -28,13 +28,32 @@ class Funcionario{
 
     }
 
-    static getAllFunctionarios(database, CNPJEmpresa){}
+    static getAllFunctionarios(db){
+
+        return new Promise((resolve, reject) =>{
+
+                db.database().collection("Funcionarios").get().then(function(querySnapshot) {
+                    if (querySnapshot.size > 0) {
+                      // Contents of first document
+                      resolve(querySnapshot.docs);
+                    } else {
+                      reject("No such document!");
+                    }
+                  })
+                  .catch(function(error) {
+                    reject("Error getting document: ", error);
+                  });
+
+
+        });
+
+    }
 
     save(db, data){
 
         return new Promise((resolve, reject)=>{
 
-            db.database().collection("Funcionarios").add(data)
+            db.database().collection("Funcionarios").doc(data.CPF_funcionario).set(data)
             .then(result =>{
                 resolve("Dados adicionados");
             })
@@ -45,8 +64,37 @@ class Funcionario{
 
     }
 
-    update(){}
-    delete(){}
+    update(db, cpf, data){
+
+        return new Promise((resolve, reject)=>{
+
+            db.database().collection("Funcionarios").doc(cpf).update(data)
+                .then(() =>{
+                    resolve("Dados atualizados com sucesso");
+                })
+                .catch(error =>{
+                    reject(error);
+                })
+
+        });
+
+    }
+
+    delete(db, cpf){
+
+        return new Promise((resolve, reject)=>{
+
+            db.database().collection("Funcionarios").doc(cpf).delete()
+                .then(() =>{
+                    resolve("Dados atualizados com sucesso");
+                })
+                .catch(error =>{
+                    reject(error);
+                })
+
+        });
+
+    }
 
 }
 

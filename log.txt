@@ -8,3 +8,6 @@
 #09/07
 - Criação dos métodos save e get das classes model Empresa e Funcionario
 - Configuração das rotas de cadastro e consulta referentes a Empresa e Funcionario
+
+#10/07
+- Criação dos métodos update, delete e getAll nas classes model Empresa e Funcionario

@@ -16,26 +16,18 @@ router.get('/', function(req, res, next) {
 
 router.get('/ola', function(req, res, next) {
 
-  // db.database().collection("users").add({
-  //   first: "Alan",
-  //   middle: "Mathison",
-  //   last: "Turing",
-  //   born: 1912
-  // })
-  // .then(function(docRef) {
-  //     console.log("Document written with ID: ", docRef.id);
-  // })
-  // .catch(function(error) {
-  //     console.error("Error adding document: ", error);
-  // });;
+  let func = new Funcionario();
 
-  //   res.render('index', { title: 'Express' });
-
-  pergunta.save(db).then(result =>{
+  func.save(db, {
+    CNPJ_empresa: "848845456",
+    CPF_funcionario: "14282as8090",
+    isAdministrator_funcionario: true,
+    nome_funcionario: "Fulana"
+  }).then(result =>{
     res.send("funfou");
   }).catch(err =>{
     console.log(err);
-    res.send("não funfou");
+    res.send(err);
   });
   
 });
@@ -52,7 +44,7 @@ router.get("/funcionario/:cpf", function(req, res, next){
 
   let func = new Funcionario();
 
-  func.getFuncionario(db, req.param.cpf).then(result =>{
+  func.getFuncionario(db, req.params.cpf).then(result =>{
     res.send(result);
   }).catch(err =>{
     res.send(err);
@@ -75,6 +67,28 @@ router.get("/empresa/:cnpj", function(req, res, next){
 router.get("/empresa/:id", function(req, res, next){
 
 
+
+});
+
+router.get("/funcionarios", function(req, res, next){
+
+  Funcionario.getAllFunctionarios().then(results =>{
+
+  }).catch(err =>{
+
+  });
+
+});
+
+router.get("/empresas", function(req, res, next){
+
+  Empresa.getAllEmpresas().then(results =>{
+
+
+  }).catch(err =>{
+
+
+  })
 
 });
 
@@ -114,7 +128,7 @@ router.post("/pergunta", function(req, res, next){
 });
 
 /* rotas para exclusão */
-router.delete("/funcionario", function(req, res, next){
+router.delete("/funcionario/:id", function(req, res, next){
 
 });
 
@@ -122,7 +136,7 @@ router.delete("/empresa", function(req, res, next){
 
 });
 
-router.delete("/pergunta", function(req, res, next){
+router.delete("/pergunta/:id", function(req, res, next){
 
 });
 
