@@ -18,15 +18,9 @@ router.get('/ola', function(req, res, next) {
 
   let func = new Funcionario();
 
-  func.save(db, {
-    CNPJ_empresa: "848845456",
-    CPF_funcionario: "14282as8090",
-    isAdministrator_funcionario: true,
-    nome_funcionario: "Fulana"
-  }).then(result =>{
-    res.send("funfou");
+  func.getFuncionario(db, req.params.cpf).then(result =>{
+    res.send(result);
   }).catch(err =>{
-    console.log(err);
     res.send(err);
   });
   
@@ -48,7 +42,7 @@ router.get("/funcionario/:cpf", function(req, res, next){
     res.send(result);
   }).catch(err =>{
     res.send(err);
-  })
+  });
 
 });
 
@@ -72,9 +66,17 @@ router.get("/empresa/:id", function(req, res, next){
 
 router.get("/funcionarios", function(req, res, next){
 
-  Funcionario.getAllFunctionarios().then(results =>{
+  Funcionario.getAllFunctionarios(db).then(results =>{
+
+    results.forEach(oi =>{
+      console.log(oi.data());
+    });
+
+    res.send(results[0].id);
 
   }).catch(err =>{
+
+    res.send(err);
 
   });
 
@@ -82,7 +84,31 @@ router.get("/funcionarios", function(req, res, next){
 
 router.get("/empresas", function(req, res, next){
 
-  Empresa.getAllEmpresas().then(results =>{
+  Empresa.getAllEmpresas(db).then(results =>{
+
+    results.forEach(oi =>{
+      console.log(oi.data());
+    });
+
+    res.send(results[0].id);
+
+
+  }).catch(err =>{
+
+
+  })
+
+});
+
+router.get("/perguntas/:cnpj", function(req, res, next){
+
+  pergunta.getAllPerguntas(db, req.params.cnpj).then(results =>{
+
+    results.forEach(oi =>{
+      console.log(oi.data());
+    });
+
+    res.send(results[0].data());
 
 
   }).catch(err =>{

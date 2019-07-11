@@ -11,3 +11,8 @@
 
 #10/07
 - Criação dos métodos update, delete e getAll nas classes model Empresa e Funcionario
+obs: delete apenas na classe Funcionario
+
+#11/07
+- Criação dos métodos getAllPerguntas, save, update e delete na classe Pergunta
+- Criação da rota get para pegar todas as perguntas de uma determinada empresa

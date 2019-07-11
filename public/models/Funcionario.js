@@ -86,7 +86,7 @@ class Funcionario{
 
             db.database().collection("Funcionarios").doc(cpf).delete()
                 .then(() =>{
-                    resolve("Dados atualizados com sucesso");
+                    resolve("Dados excluidos com sucesso");
                 })
                 .catch(error =>{
                     reject(error);

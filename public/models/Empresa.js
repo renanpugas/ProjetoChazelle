@@ -45,7 +45,6 @@ class Empresa{
                 reject("Error getting document: ", error);
               });
 
-
     });
 
     }
@@ -81,7 +80,6 @@ class Empresa{
 
     }
 
-    delete(){}
 
 }
 
