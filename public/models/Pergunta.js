@@ -21,15 +21,35 @@ class Pergunta{
               });
 
 
-    });
+            });
 
     }
 
-    save(db, cnpj, data){
+    getPergunta(db, id){
+
+        return new Promise((resolve, reject) =>{
+
+            db.database().collection("Perguntas").doc(id).get().then(doc =>{
+
+                if (doc.exists) {
+                    resolve(doc.data());
+                  } else {
+                    reject("No such document!");
+                  }
+                })
+                .catch(function(error) {
+                  reject("Error getting document: ", error);
+                });
+
+        });
+
+    }
+
+    save(db, data){
 
         return new Promise((resolve, reject)=>{
             
-            db.database().collection("Empresas").doc(cnpj).collection("Perguntas").add(data)
+            db.database().collection("Perguntas").add(data)
             .then(result =>{
                 resolve("Dados adicionados");
             })
@@ -40,27 +60,27 @@ class Pergunta{
 
     }
 
-    update(db, cnpj, id){
+    update(db, id, data){
 
         return new Promise((resolve, reject)=>{
 
-            db.database().collection("Empresas").doc(cnpj).collection("Perguntas").doc(id).update(data)
+            db.database().collection("Perguntas").doc(id).update(data)
                 .then(results =>{
                     resolve("Dados atualizados com sucesso");
                 })
                 .catch(err =>{
-                    reject(error);
+                    reject(err);
                 })
 
         });
 
     }
 
-    delete(){
+    delete(db, id){
 
         return new Promise((resolve, reject)=>{
 
-            db.database().collection("Empresas").doc(cnpj).collection("Perguntas").doc(id).delete()
+            db.database().collection("Perguntas").doc(id).delete()
                 .then(results =>{
                     resolve("Dados deletados com sucesso");
                 })

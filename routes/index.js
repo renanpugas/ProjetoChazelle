@@ -16,10 +16,23 @@ router.get('/', function(req, res, next) {
 
 router.get('/ola', function(req, res, next) {
 
-  let func = new Funcionario();
+  // let func = new Funcionario();
 
-  func.getFuncionario(db, req.params.cpf).then(result =>{
-    res.send(result);
+  // func.getFuncionario(db, req.params.cpf).then(result =>{
+  //   res.send(result);
+  // }).catch(err =>{
+  //   res.send(err);
+  // });
+
+  let perg = new pergunta();
+
+  perg.update(db, "EANK9KTHKa2A2ugvDsOb", {
+    CNPJ_pergunta: "4o0zhjwVQQo3wUFNyFuK",
+    enunciado_pergunta: "oila",
+    pergunta_rive: "ola",
+    resposta_pergunta: "blz"
+  }).then(results => {
+    res.send(results);
   }).catch(err =>{
     res.send(err);
   });
@@ -61,6 +74,18 @@ router.get("/empresa/:cnpj", function(req, res, next){
 router.get("/empresa/:id", function(req, res, next){
 
 
+
+});
+
+router.get("/pergunta/:idPergunta", function(req, res, next){
+
+  let perg = new pergunta();
+  
+  perg.getPergunta(db, req.params.idPergunta).then(results => {
+    res.send(results);
+  }).catch(err =>{
+    res.send(err);
+  });
 
 });
 
@@ -124,10 +149,10 @@ router.post("/funcionario", function(req, res, next){
   let func = new Funcionario();
 
   func.save(db, {
-    CNPJ_empresa: "848845456",
-    CPF_funcionario: "14282as8090",
-    isAdministrator_funcionario: true,
-    nome_funcionario: "Fulana"
+    CNPJ_empresa: req.body.CNPJ,
+    CPF_funcionario: req.body.cpf,
+    isAdministrator_funcionario: req.body.isAdministrator,
+    nome_funcionario: req.body.nome
   }).then(result =>{
     res.send("funfou");
   }).catch(err =>{
@@ -150,6 +175,19 @@ router.post("/empresa", function(req, res, next){
 });
 
 router.post("/pergunta", function(req, res, next){
+
+  let perg = new pergunta();
+
+  perg.save(db, {
+    CNPJ_pergunta: req.body.CNPJ,
+    enunciado_pergunta: req.body.enunciado,
+    pergunta_rive: req.body.perguntaRive,
+    resposta_pergunta: req.body.resposta
+  }).then(results => {
+    res.send(results);
+  }).catch(err =>{
+    res.send(err);
+  });
 
 });
 
