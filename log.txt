@@ -16,3 +16,10 @@ obs: delete apenas na classe Funcionario
 #11/07
 - Criação dos métodos getAllPerguntas, save, update e delete na classe Pergunta
 - Criação da rota get para pegar todas as perguntas de uma determinada empresa
+
+#15/07
+- Alterações na classe model Pergunta
+
+#17/07
+- Criação das rotas para atualização
+- Alteração no método delete das classes model Pergunta e Funcionario

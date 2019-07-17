@@ -191,8 +191,69 @@ router.post("/pergunta", function(req, res, next){
 
 });
 
+/* rotas para atualização */
+router.post("/funcionario/:id", function(req, res, next){
+
+  let func = new Funcionario();
+
+  func.save(db, req.params.id, {
+    CNPJ_empresa: req.body.CNPJ,
+    CPF_funcionario: req.body.cpf,
+    isAdministrator_funcionario: req.body.isAdministrator,
+    nome_funcionario: req.body.nome
+  }).then(result =>{
+    res.send("funfou");
+  }).catch(err =>{
+    console.log(err);
+    res.send(err);
+  });
+
+});
+
+router.post("/empresa/:id", function(req, res, next){
+
+  let empresa = new Empresa();
+
+  empresa.save(db, req.param.id, data).then(result =>{
+    res.send(result);
+  }).catch(err =>{
+    res.send(err);
+  });
+
+});
+
+router.post("/pergunta/:id", function(req, res, next){
+
+  let perg = new pergunta();
+
+  perg.save(db, req.params.id, {
+    CNPJ_pergunta: req.body.CNPJ,
+    enunciado_pergunta: req.body.enunciado,
+    pergunta_rive: req.body.perguntaRive,
+    resposta_pergunta: req.body.resposta
+  }).then(results => {
+    res.send(results);
+  }).catch(err =>{
+    res.send(err);
+  });
+
+});
+
+
 /* rotas para exclusão */
 router.delete("/funcionario/:id", function(req, res, next){
+
+  let func = new Funcionario();
+
+  func.delete(db, req.params.id).then((results) =>{
+
+    res.send(results);
+
+  }).catch(err =>{
+
+    res.send(err);
+
+  });
 
 });
 
@@ -201,6 +262,18 @@ router.delete("/empresa", function(req, res, next){
 });
 
 router.delete("/pergunta/:id", function(req, res, next){
+
+  let perg = new pergunta();
+
+  perg.delete(db, req.params.id).then((results) =>{
+
+    res.send(results);
+
+  }).catch(err =>{
+
+    res.send(err);
+
+  });
 
 });
 

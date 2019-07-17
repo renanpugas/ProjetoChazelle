@@ -84,18 +84,29 @@ class Funcionario{
 
         return new Promise((resolve, reject)=>{
 
-            db.database().collection("Funcionarios").doc(cpf).delete()
-                .then(() =>{
-                    resolve("Dados excluidos com sucesso");
-                })
-                .catch(error =>{
-                    reject(error);
-                })
+            db.database().collection("Funcionarios").doc(cpf).get().then((docSnapshot) => {
+                if (docSnapshot.exists) {
+
+                db.database().collection("Funcionarios").doc(cpf).delete()
+                    .then(() =>{
+                        resolve("Dados excluidos com sucesso");
+                    })
+                    .catch(error =>{
+                        reject(error);
+                    });
+
+                } else {
+
+                    reject("Documento não encontrado");
+
+                } 
+
+            });
 
         });
 
     }
-
+    
 }
 
 module.exports = Funcionario;

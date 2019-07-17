@@ -80,13 +80,24 @@ class Pergunta{
 
         return new Promise((resolve, reject)=>{
 
-            db.database().collection("Perguntas").doc(id).delete()
-                .then(results =>{
-                    resolve("Dados deletados com sucesso");
-                })
-                .catch(err =>{
-                    reject(error);
-                })
+            db.database().collection("Perguntas").doc(id).get().then((docSnapshot) => {
+                if (docSnapshot.exists) {
+
+                db.database().collection("Funcionarios").doc(id).delete()
+                    .then(() =>{
+                        resolve("Dados excluidos com sucesso");
+                    })
+                    .catch(error =>{
+                        reject(error);
+                    });
+
+                } else {
+
+                    reject("Documento não encontrado");
+
+                } 
+
+            });
 
         });
 
