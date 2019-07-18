@@ -67,7 +67,7 @@ router.get("/empresa/:cnpj", function(req, res, next){
     res.send(result);
   }).catch(err =>{
     res.send(err);
-  })
+  });
 
 });
 
@@ -97,7 +97,8 @@ router.get("/funcionarios", function(req, res, next){
       console.log(oi.data());
     });
 
-    res.send(results[0].id);
+    // res.send(results[0].id);
+    res.send(results);
 
   }).catch(err =>{
 
@@ -115,11 +116,13 @@ router.get("/empresas", function(req, res, next){
       console.log(oi.data());
     });
 
-    res.send(results[0].id);
+    //res.send(results[0].id);
+    res.send(results);
 
 
   }).catch(err =>{
 
+    res.send(err);
 
   })
 
@@ -133,11 +136,13 @@ router.get("/perguntas/:cnpj", function(req, res, next){
       console.log(oi.data());
     });
 
-    res.send(results[0].data());
+    // res.send(results[0].data());
+    res.send(results);
 
 
   }).catch(err =>{
-
+    
+    res.send(err);
 
   })
 
@@ -166,7 +171,11 @@ router.post("/empresa", function(req, res, next){
 
   let empresa = new Empresa();
 
-  empresa.save(db, data).then(result =>{
+  empresa.save(db, {
+    CNPJ_empresa: req.body.CNPJ,
+    nome_empresa: req.body.nome,
+    ramo_empresa: req.body.ramo
+  }).then(result =>{
     res.send(result);
   }).catch(err =>{
     res.send(err);
@@ -214,7 +223,11 @@ router.post("/empresa/:id", function(req, res, next){
 
   let empresa = new Empresa();
 
-  empresa.save(db, req.param.id, data).then(result =>{
+  empresa.save(db, req.params.id, {
+    CNPJ_empresa: req.body.CNPJ,
+    nome_empresa: req.body.nome,
+    ramo_empresa: req.body.ramo
+  }).then(result =>{
     res.send(result);
   }).catch(err =>{
     res.send(err);
