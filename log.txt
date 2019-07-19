@@ -26,3 +26,6 @@ obs: delete apenas na classe Funcionario
 
 #18/08
 - Ajustes nas rotas de criação e alteração
+
+#19/09
+- Criação rota get para arquivos river
