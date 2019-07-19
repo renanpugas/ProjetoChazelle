@@ -5,6 +5,7 @@ var db = new firestore();
 var pergunta = require("./../public/models/Pergunta");
 var Funcionario = require("./../public/models/Funcionario");
 var Empresa = require("./../public/models/Empresa");
+var fs = require("fs");
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -68,12 +69,6 @@ router.get("/empresa/:cnpj", function(req, res, next){
   }).catch(err =>{
     res.send(err);
   });
-
-});
-
-router.get("/empresa/:id", function(req, res, next){
-
-
 
 });
 
@@ -200,6 +195,12 @@ router.post("/pergunta", function(req, res, next){
 
 });
 
+router.post("/empresa/:nome", function(req, res, next){
+
+  fs.app
+
+});
+
 /* rotas para atualização */
 router.post("/funcionario/:id", function(req, res, next){
 
@@ -289,5 +290,22 @@ router.delete("/pergunta/:id", function(req, res, next){
   });
 
 });
+
+/* rotas para arquivos rive*/
+router.get("/empresa/rive/:id", function(req, res, next){
+
+  fs.appendFile(`./rive_files/${req.params.id}.rive`, "ola \r\n", err =>{
+
+    if(err) res.send(err);
+
+    res.send("Dados adicionados com sucesso");
+
+  });
+
+});
+
+router.post("/empresa/rive/:id", function(req, res, next){
+
+})
 
 module.exports = router;
