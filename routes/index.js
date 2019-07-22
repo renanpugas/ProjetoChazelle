@@ -5,7 +5,9 @@ var db = new firestore();
 var pergunta = require("./../public/models/Pergunta");
 var Funcionario = require("./../public/models/Funcionario");
 var Empresa = require("./../public/models/Empresa");
+const replace = require('replace-in-file');
 var fs = require("fs");
+
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -300,6 +302,84 @@ router.get("/empresa/rive/:id", function(req, res, next){
 
     res.send("Dados adicionados com sucesso");
 
+  });
+
+});
+router.get("/paocomovo", function(req, res, next){
+
+  fs.readFile('rive_files/leroymerlin.rive', 'utf8', (err, data) => {
+    if(err) {
+        console.log('An error occured', err);
+    }
+
+    // const regex = new RegExp('/\+\' + "oi" + '\n\-\', 'i');
+
+    // /\+\oi\n\-\oila/g
+    let backgroundColorToReplace = data.replace(/\+\oi\n\-\oila/g, "+oila\n-pao");
+
+    fs.writeFile('rive_files/leroymerlin.rive', backgroundColorToReplace, (err) => {
+        if(err) {
+             console.log('An error occured', err);
+        }
+
+        console.log('Colors successfully changed');
+    });
+});
+
+
+
+var lineReader = require('readline').createInterface({
+  input: require('fs').createReadStream('rive_files/leroymerlin.rive'),
+});
+
+lineReader.on('line', function (line) {
+  //ws.write("oi");
+  console.log('Line from file:', line);
+});
+
+
+
+res.send("oi");
+
+
+});
+
+
+router.get("/testeRive", function(req, res, next){
+
+  // var teste1 = "oi";
+  // var teste2 = "oila"
+  // var regex = new RegExp("\\+\\" + teste1 + "\\n\\-\\" + teste2, "g");
+
+  const options = {
+    files: 'rive_files/leroymerlin.rive',
+    from: /\+\oi\n\-\oila/g,
+    to: '+pao\n-vaiCorinthians',
+  };
+
+
+  replace(options)
+  .then(results => {
+
+    const changedFiles = results
+  .filter(result => result.hasChanged)
+  .map(result => result.file);
+
+
+    let fileHasChanged = JSON.stringify(results);
+    fileHasChanged.includes(`"hasChanged":false`) ? console.log("false") : console.log("true");
+
+    let ola = JSON.stringify(results).replace("[", "").replace("]", "").replace(`"f`, "f").replace(`e"`, "e").replace(`"h`, "h").replace(`d"`, "d").replace("{", "").replace("}", "");
+    //let oi = JSON.parse(ola);
+    //oi.replace("]", "");
+    //let ola = JSON.parse(oi);
+    console.log(fileHasChanged);
+
+    res.send(results);
+    
+  })
+  .catch(error => {
+    console.error('Error occurred:', error);
   });
 
 });

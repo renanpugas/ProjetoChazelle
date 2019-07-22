@@ -24,8 +24,11 @@ obs: delete apenas na classe Funcionario
 - Criação das rotas para atualização
 - Alteração no método delete das classes model Pergunta e Funcionario
 
-#18/08
+#18/07
 - Ajustes nas rotas de criação e alteração
 
-#19/09
+#19/07
 - Criação rota get para arquivos river
+
+#22/07
+- Testes para substituir valores nos arquivos rive
