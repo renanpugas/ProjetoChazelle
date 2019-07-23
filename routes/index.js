@@ -305,6 +305,83 @@ router.get("/empresa/rive/:id", function(req, res, next){
   });
 
 });
+
+// Altera pergunta e resposta no arquivo .rive
+router.put("/empresa/rive/:id", function(req, res, next){
+
+  var pergOriginal = req.body.perguntaOriginal;
+  var respOriginal = req.body.respostaOriginal;
+  var pergNova = req.body.perguntaNova;
+  var respNova = req.body.respostaNova
+  var regex = new RegExp("\\+" + pergOriginal + "\\n\\-" + respOriginal, "g");
+
+  let options1 = {
+    files: `rive_files/${req.params.id}.rive`,
+    from: regex,
+    to: `+${pergNova}\n-${respNova}`,
+  };
+
+  console.log(regex);
+
+  replace(options1).then(results => {
+
+    //const changedFiles = results.filter(result => result.hasChanged).map(result => result.file);
+
+    let fileHasChanged = JSON.stringify(results);
+    fileHasChanged.includes(`"hasChanged":false`) ? console.log("false") : console.log("true");
+
+    let ola = JSON.stringify(results).replace("[", "").replace("]", "").replace(`"f`, "f").replace(`e"`, "e").replace(`"h`, "h").replace(`d"`, "d").replace("{", "").replace("}", "");
+    //let oi = JSON.parse(ola);
+    //oi.replace("]", "");
+    //let ola = JSON.parse(oi);
+    console.log(fileHasChanged);
+
+    res.send(results);
+    
+  })
+  .catch(error => {
+    console.error('Error occurred:', error);
+  });
+
+});
+
+// Exclui pergunta no arquivo .rive
+router.delete("/empresa/rive/:id", function(req, res, next){
+
+  var teste1 = req.body.perguntaOriginal;
+  var teste2 = req.body.respostaOriginal;
+  var regex = new RegExp("\\+" + teste1 + "\\n\\-" + teste2, "g");
+
+  let options1 = {
+    files: `rive_files/${req.params.id}.rive`,
+    from: regex,
+    to: "",
+  };
+
+  console.log(regex);
+
+  replace(options1).then(results => {
+
+    //const changedFiles = results.filter(result => result.hasChanged).map(result => result.file);
+
+    let fileHasChanged = JSON.stringify(results);
+    fileHasChanged.includes(`"hasChanged":false`) ? console.log("false") : console.log("true");
+
+    let ola = JSON.stringify(results).replace("[", "").replace("]", "").replace(`"f`, "f").replace(`e"`, "e").replace(`"h`, "h").replace(`d"`, "d").replace("{", "").replace("}", "");
+    //let oi = JSON.parse(ola);
+    //oi.replace("]", "");
+    //let ola = JSON.parse(oi);
+    console.log(fileHasChanged);
+
+    res.send(results);
+    
+  })
+  .catch(error => {
+    console.error('Error occurred:', error);
+  });
+
+});
+
 router.get("/paocomovo", function(req, res, next){
 
   fs.readFile('rive_files/leroymerlin.rive', 'utf8', (err, data) => {
@@ -347,9 +424,9 @@ res.send("oi");
 
 router.get("/testeRive", function(req, res, next){
 
-  // var teste1 = "oi";
-  // var teste2 = "oila"
-  // var regex = new RegExp("\\+\\" + teste1 + "\\n\\-\\" + teste2, "g");
+  var teste1 = "oi";
+  var teste2 = "oila"
+  var regex = new RegExp("\\+\\" + teste1 + "\\n\\-\\" + teste2, "g");
 
   const options = {
     files: 'rive_files/leroymerlin.rive',
