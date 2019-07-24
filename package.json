@@ -14,6 +14,7 @@
     "http-errors": "~1.6.3",
     "morgan": "~1.9.1",
     "nodemon": "~1.18.10",
-    "replace-in-file": "^4.1.1"
+    "replace-in-file": "^4.1.1",
+    "rivescript": "^2.0.0"
   }
 }

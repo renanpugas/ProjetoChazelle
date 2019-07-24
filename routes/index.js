@@ -6,6 +6,7 @@ var pergunta = require("./../public/models/Pergunta");
 var Funcionario = require("./../public/models/Funcionario");
 var Empresa = require("./../public/models/Empresa");
 const replace = require('replace-in-file');
+var rivescript = require("rivescript");
 var fs = require("fs");
 
 
@@ -294,7 +295,46 @@ router.delete("/pergunta/:id", function(req, res, next){
 });
 
 /* rotas para arquivos rive*/
+
 router.get("/empresa/rive/:id", function(req, res, next){
+
+  var bot = new rivescript();
+  var resposta = "";
+
+  bot.loadFile(`./rive_files/${req.params.id}.rive`).then(loading_done).catch(loading_error);
+
+  function loading_done() {
+    console.log("Bot has finished loading!");
+   
+    // Now the replies must be sorted!
+    bot.sortReplies();
+   
+    // And now we're free to get a reply from the brain!
+   
+    // RiveScript remembers user data by their username and can tell
+    // multiple users apart.
+    let username = "local-user";
+   
+    // NOTE: the API has changed in v2.0.0 and returns a Promise now.
+    bot.reply(username, req.body.pergunta).then(function(reply) {
+      console.log("The bot says: " + reply);
+      let pao = reply;
+      res.send(`Pergunta: ${req.body.pergunta}<br>
+            Bot Responde: ${pao}`);
+    }).catch(error =>{
+      res.send(error);
+    });
+  }
+   
+  // It's good to catch errors too!
+  function loading_error(error, filename, lineno) {
+    console.log("Error when loading files: " + error);
+    res.send(error);
+  }
+
+});
+
+router.post("/empresa/rive/:id", function(req, res, next){
 
   fs.appendFile(`./rive_files/${req.params.id}.rive`, "ola \r\n", err =>{
 
