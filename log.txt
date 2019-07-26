@@ -34,4 +34,11 @@ obs: delete apenas na classe Funcionario
 - Testes para substituir valores nos arquivos rive
 
 #23/07
-- Criação de rotas put e delete para arquivos file
+- Criação de rotas put e delete para arquivos rive
+
+#24/07
+- Configuração da rota get para arquivos rive (integração com interpretador Rivescript)
+
+#25/07
+- Testes no layout (home)
+- Ajuste no css do menu lateral e da caixa de pesquisa superior do layout
