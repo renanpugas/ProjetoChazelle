@@ -14639,3 +14639,12 @@ section {
 .vue-lists ul, .vue-lists ol {
     padding-left: 30px;
 }
+
+/* Custom CSS */
+.process {
+	color: #28a745 !important;
+}
+
+.denied {
+	color: #fa4251 !important;
+}
