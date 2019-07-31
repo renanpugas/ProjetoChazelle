@@ -49,3 +49,6 @@ obs: delete apenas na classe Funcionario
 
 #30/07
 - Criação das views Cadastrar Funcionário, Listar Funcionários e Editar Funcionário
+
+#31/07
+- Criação das views Cadastrar Pergunta, Listar Perguntas e Editar Pergunta
