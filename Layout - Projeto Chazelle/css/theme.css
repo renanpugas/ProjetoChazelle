@@ -14657,3 +14657,15 @@ section {
 .denied {
 	color: #fa4251 !important;
 }
+
+.btn-thumb {
+	margin: 7px;
+}
+
+.btn-thumb-like {
+	color: blue;
+}
+
+.btn-thumb-dislike {
+	color: red;
+}

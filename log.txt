@@ -52,3 +52,6 @@ obs: delete apenas na classe Funcionario
 
 #31/07
 - Criação das views Cadastrar Pergunta, Listar Perguntas e Editar Pergunta
+
+#01/08
+- Edição da view Chat
