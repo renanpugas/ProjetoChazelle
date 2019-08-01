@@ -3315,9 +3315,7 @@ section {
 
 .au-card-title {
     position: relative;
-    padding: 40px;
-    padding-top: 45px;
-    padding-bottom: 47px;
+    padding: 25px;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -3525,6 +3523,17 @@ section {
 }
 
 @media (max-width: 767px) {
+	
+	.au-chat-textfield{
+		padding: 40px !important;
+		padding-top: 32px !important;
+		padding-bottom: 50px !important;
+	}
+	
+	.chat{
+		margin-bottom: 40px !important;
+	}
+	
     .au-message__item-inner {
         padding: 15px;
         padding-right: 10px;
