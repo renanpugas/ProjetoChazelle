@@ -55,3 +55,6 @@ obs: delete apenas na classe Funcionario
 
 #01/08
 - Edição da view Chat
+
+#02/08
+- Integração das views com o programa
