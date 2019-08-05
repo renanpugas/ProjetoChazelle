@@ -1,0 +1,133 @@
+<%- include("inc/head") -%>
+<%- include("inc/header") -%>
+
+<!-- MAIN CONTENT-->
+<div class="main-content">
+    <div class="section__content section__content--p30">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="overview-wrap">
+                        <h2 class="title-1">Perguntas Cadastradas</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12" style="margin: 1.2rem 0 1.2rem 0">
+                    <!-- DATA TABLE -->
+                    <div class="table-data__tool">
+                        <div class="table-data__tool-left">
+                            <div class="rs-select2--light rs-select2--md">
+                                <select class="js-select2 select2-hidden-accessible" name="property" tabindex="-1" aria-hidden="true">
+                                    <option selected="selected">Filtrar por:</option>
+                                    <option value="">Pergunta</option>
+                                    <option value="">Avaliação Média</option>
+                                </select>
+                                <div class="dropDownSelect2"></div>
+                            </div>
+                            <div class="rs-select2--light rs-select2--md">
+                                <select class="js-select2 select2-hidden-accessible" name="time" tabindex="-1" aria-hidden="true">
+                                    <option selected="selected">Ordenar por:</option>
+                                    <option value="">Crescente</option>
+                                    <option value="">Decrescente</option>
+                                </select>
+                                <div class="dropDownSelect2"></div>
+                            </div>
+                            <button class="au-btn-filter">
+                                <i class="zmdi zmdi-filter-list"></i>Filtrar</button>
+                        </div>
+                        <div class="table-data__tool-right">
+                            <button class="au-btn au-btn-icon au-btn--green au-btn--small">
+                                <i class="zmdi zmdi-plus"></i>Cadastrar Pergunta</button>
+                            <div class="rs-select2--dark rs-select2--sm rs-select2--dark2">
+                                <select class="js-select2 select2-hidden-accessible" name="type" tabindex="-1" aria-hidden="true">
+                                    <option selected="selected">Export</option>
+                                    <option value="">Option 1</option>
+                                    <option value="">Option 2</option>
+                                </select>
+                                <div class="dropDownSelect2"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="table-responsive table-responsive-data2">
+                        <table class="table table-data2">
+                            <thead>
+                                <tr>
+                                    <th>Pergunta</th>
+                                    <th>Resposta</th>
+                                    <th>Avaliação Média</th>
+                                    <th>Opções</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="tr-shadow">
+                                    <td>Vamos, vamos corinthians essa noite teremos que ganhar</td>
+                                    <td>Vamos, vamos corinthians essa noite teremos que ganhar pao com ovo pao	</td>
+                                    <td class="process">4.2</td>
+                                    <td>
+                                        <div class="table-data-feature">
+                                            <button class="item" data-toggle="tooltip" data-placement="top" title="" data-original-title="Editar">
+                                                <i class="zmdi zmdi-edit"></i>
+                                            </button>
+                                            <button class="item" data-toggle="tooltip" data-placement="top" title="" data-original-title="Excluir">
+                                                <i class="zmdi zmdi-delete"></i>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr class="spacer"></tr>
+                                <tr class="tr-shadow">
+                                    <td>Vamos, vamos corinthians essa noite teremos que ganhar</td>
+                                    <td>Vamos, vamos corinthians essa noite teremos que ganhar pao com ovo pao	</td>
+                                    <td class="process">4.2</td>
+                                    <td>
+                                        <div class="table-data-feature">
+                                            <button class="item" data-toggle="tooltip" data-placement="top" title="" data-original-title="Editar">
+                                                <i class="zmdi zmdi-edit"></i>
+                                            </button>
+                                            <button class="item" data-toggle="tooltip" data-placement="top" title="" data-original-title="Excluir">
+                                                <i class="zmdi zmdi-delete"></i>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr class="spacer"></tr>
+                                <tr class="tr-shadow">
+                                    <td>Vamos, vamos corinthians essa noite teremos que ganhar</td>
+                                    <td>Vamos, vamos corinthians essa noite teremos que ganhar pao com ovo pao	</td>
+                                    <td class="process">4.2</td>
+                                    <td>
+                                        <div class="table-data-feature">
+                                            <button class="item" data-toggle="tooltip" data-placement="top" title="" data-original-title="Editar">
+                                                <i class="zmdi zmdi-edit"></i>
+                                            </button>
+                                            <button class="item" data-toggle="tooltip" data-placement="top" title="" data-original-title="Excluir">
+                                                <i class="zmdi zmdi-delete"></i>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr class="spacer"></tr>
+                                <tr class="tr-shadow">
+                                    <td>Vamos, vamos corinthians essa noite teremos que ganhar</td>
+                                    <td>Vamos, vamos corinthians essa noite teremos que ganhar pao com ovo pao	</td>
+                                    <td class="denied">2.2</td>
+                                    <td>
+                                        <div class="table-data-feature">
+                                            <button class="item" data-toggle="tooltip" data-placement="top" title="" data-original-title="Editar">
+                                                <i class="zmdi zmdi-edit"></i>
+                                            </button>
+                                            <button class="item" data-toggle="tooltip" data-placement="top" title="" data-original-title="Excluir">
+                                                <i class="zmdi zmdi-delete"></i>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- END DATA TABLE -->
+                </div>
+            </div>
+
+<%- include("inc/footer") -%>

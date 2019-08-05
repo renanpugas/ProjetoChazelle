@@ -24,6 +24,45 @@ router.get("/index", function(req, res, next){
 
 });
 
+router.get("/funcionarios", function(req, res, next){
+
+  res.render("listarFuncionarios");
+
+  // Funcionario.getAllFunctionarios(db).then(results =>{
+
+  //   results.forEach(oi =>{
+  //     console.log(oi.data());
+  //   });
+
+  //   // res.send(results[0].id);
+  //   res.send(results);
+
+  // }).catch(err =>{
+
+  //   res.send(err);
+
+  // });
+
+});
+
+router.get("/perguntas", function(req, res, next){
+
+  res.render("listarPerguntas");
+
+});
+
+router.get("/cadastrarFuncionario", function(req, res, next){
+
+  res.render("cadFuncionario");
+
+});
+
+router.get("/cadastrarPergunta", function(req, res, next){
+
+  res.render("cadPergunta");
+
+});
+
 router.get('/ola', function(req, res, next) {
 
   // let func = new Funcionario();
@@ -50,9 +89,9 @@ router.get('/ola', function(req, res, next) {
 });
 
 //rota destinada a pagina de chat
-router.get("/chat/:empresa", function(req, res, next){
+router.get("/:nomeEmpresa", function(req, res, next){
 
-
+  res.render("chatbot");
 
 });
 
@@ -93,24 +132,6 @@ router.get("/pergunta/:idPergunta", function(req, res, next){
 
 });
 
-router.get("/funcionarios", function(req, res, next){
-
-  Funcionario.getAllFunctionarios(db).then(results =>{
-
-    results.forEach(oi =>{
-      console.log(oi.data());
-    });
-
-    // res.send(results[0].id);
-    res.send(results);
-
-  }).catch(err =>{
-
-    res.send(err);
-
-  });
-
-});
 
 router.get("/empresas", function(req, res, next){
 
