@@ -20,7 +20,33 @@ router.get('/', function(req, res, next) {
 
 router.get("/index", function(req, res, next){
 
-  res.render("index");
+  res.render("index", {
+    title: 'Projeto Chazelle'
+  });
+
+});
+
+router.get("/login", function(req, res, next){
+
+  res.render("login", {
+    title: "Login - Projeto Chazelle"
+  });
+
+});
+
+router.get("/registrarFuncionario", function(req, res, next){
+
+  res.render("regFuncionario", {
+    title: "Registrar Funcionário - Projeto Chazelle"
+  });
+
+});
+
+router.get("/registrarEmpresa", function(req, res, next){
+
+  res.render("regEmpresa", {
+    title: "Registrar Empresa - Projeto Chazelle"
+  });
 
 });
 
