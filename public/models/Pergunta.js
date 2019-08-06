@@ -8,7 +8,7 @@ class Pergunta{
 
         return new Promise((resolve, reject) =>{
 
-            db.database().collection("Empresas").doc(cnpj).collection("Perguntas").get().then(function(querySnapshot) {
+            db.database().collection("Perguntas").get().then(function(querySnapshot) {
                 if (querySnapshot.size > 0) {
                   // Contents of first document
                   resolve(querySnapshot.docs);

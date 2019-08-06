@@ -60,9 +60,11 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                <% results.forEach(row =>{ %>
+                                <% console.log(row) %>
                                 <tr class="tr-shadow">
-                                    <td>Vamos, vamos corinthians essa noite teremos que ganhar</td>
-                                    <td>Vamos, vamos corinthians essa noite teremos que ganhar pao com ovo pao	</td>
+                                    <td><%= row.data().enunciado_pergunta %></td>
+                                    <td><%= row.data().resposta_pergunta %></td>
                                     <td class="process">4.2</td>
                                     <td>
                                         <div class="table-data-feature">
@@ -76,7 +78,8 @@
                                     </td>
                                 </tr>
                                 <tr class="spacer"></tr>
-                                <tr class="tr-shadow">
+                                <% }); %>
+                                <!-- <tr class="tr-shadow">
                                     <td>Vamos, vamos corinthians essa noite teremos que ganhar</td>
                                     <td>Vamos, vamos corinthians essa noite teremos que ganhar pao com ovo pao	</td>
                                     <td class="process">4.2</td>
@@ -122,7 +125,7 @@
                                             </button>
                                         </div>
                                     </td>
-                                </tr>
+                                </tr> -->
                             </tbody>
                         </table>
                     </div>

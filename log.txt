@@ -61,3 +61,6 @@ obs: delete apenas na classe Funcionario
 
 #05/08
 - Integração das views listar Funcionarios, listar Perguntas, cadastrar Funcionario, cadastrar Pergunta e chat com o programa
+
+#06/08
+- Views Lister Funcionarios e Listar Perguntas exibindo informações vindas do banco de dados

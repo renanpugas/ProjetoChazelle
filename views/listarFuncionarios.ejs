@@ -61,13 +61,14 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr class="tr-shadow">
+                        <% results.forEach(row =>{ %> 
+                        <tr class="tr-shadow" data-row="<%= JSON.stringify(row.data()) %>" data-id="<%= row.id %>">
                             <td></td>
-                            <td>Renan Teixeira</td>
+                            <td> <%= row.data().nome_funcionario %> </td>
                             <td>
                                 <span class="block-email">renanpugas@gmail.com</span>
                             </td>
-                            <td class="desc">111.111.111-11</td>
+                            <td class="desc"><%= row.data().CPF_funcionario %></td>
                             <td>
                                 <div class="table-data-feature">
                                     <button class="item" data-toggle="tooltip" data-placement="top" title="" data-original-title="Editar">
@@ -80,7 +81,8 @@
                             </td>
                         </tr>
                         <tr class="spacer"></tr>
-                        <tr class="tr-shadow">
+                        <% }); %>
+                        <!-- <tr class="tr-shadow">
                             <td></td>
                             <td>Renan Teixeira Pugas Silva</td>
                             <td>
@@ -135,7 +137,7 @@
                                     </button>
                                 </div>
                             </td>
-                        </tr>
+                        </tr> -->
                     </tbody>
                 </table>
             </div>

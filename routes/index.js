@@ -26,28 +26,53 @@ router.get("/index", function(req, res, next){
 
 router.get("/funcionarios", function(req, res, next){
 
-  res.render("listarFuncionarios");
+  Funcionario.getAllFunctionarios(db).then(results =>{
 
-  // Funcionario.getAllFunctionarios(db).then(results =>{
+    // results.forEach(oi =>{
+    //   console.log(oi.data());
+    // });
 
-  //   results.forEach(oi =>{
-  //     console.log(oi.data());
-  //   });
+    // // res.send(results[0].id);
+    // res.send(results);
 
-  //   // res.send(results[0].id);
-  //   res.send(results);
+    res.render("listarFuncionarios", {
+      results
+    });
 
-  // }).catch(err =>{
 
-  //   res.send(err);
+  }).catch(err =>{
 
-  // });
+    res.render("listarFuncionarios", {
+      err
+    });
+
+  });
 
 });
 
 router.get("/perguntas", function(req, res, next){
 
-  res.render("listarPerguntas");
+  pergunta.getAllPerguntas(db, "4o0zhjwVQQo3wUFNyFuK").then(results =>{
+
+    // results.forEach(oi =>{
+    //   console.log(oi.data());
+    // });
+
+    // // res.send(results[0].id);
+    // res.send(results);
+
+    res.render("listarPerguntas", {
+      results
+    });
+
+
+  }).catch(err =>{
+
+    res.render("listarPerguntas", {
+      err
+    });
+
+  });
 
 });
 
