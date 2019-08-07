@@ -373,7 +373,7 @@
                                             <img src="images/icon/avatar-07.jpg" alt="John Doe" />
                                         </div>
                                         <div class="content">
-                                            <a class="js-acc-btn" href="#">Damien Chazelle</a>
+                                            <a class="js-acc-btn" href="#"><%= user.nome_funcionario %></a>
                                         </div>
                                         <div class="account-dropdown js-dropdown">
                                             <div class="info clearfix">
@@ -384,9 +384,9 @@
                                                 </div>
                                                 <div class="content">
                                                     <h5 class="name">
-                                                        <a href="#">Damien Chazelle</a>
+                                                        <a href="#"><%= user.nome_funcionario %></a>
                                                     </h5>
-                                                    <span class="email">chazelle@example.com</span>
+                                                    <span class="email"><%= user.email_funcionario %></span>
                                                 </div>
                                             </div>
                                             <div class="account-dropdown__body">
@@ -404,7 +404,7 @@
                                                 </div>
                                             </div>
                                             <div class="account-dropdown__footer">
-                                                <a href="#">
+                                                <a href="/logout">
                                                     <i class="zmdi zmdi-power"></i>Sair</a>
                                             </div>
                                         </div>

@@ -13,6 +13,7 @@ var fs = require("fs");
 /* GET home page. */
 router.get('/', function(req, res, next) {
   
+  //req.session.user = "ok";
   db.database();
   res.render('index', { title: 'Express' });
   
@@ -20,19 +21,45 @@ router.get('/', function(req, res, next) {
 
 router.get("/index", function(req, res, next){
 
+  console.log(req.session.user);
   res.render("index", {
-    title: 'Projeto Chazelle'
+    title: 'Projeto Chazelle',
+    user: req.session.user
   });
 
 });
 
 router.get("/login", function(req, res, next){
 
+  //console.log(req.session.user.CNPJ_empresa);
   res.render("login", {
     title: "Login - Projeto Chazelle"
   });
 
 });
+
+router.post("/login", function(req, res, next){
+
+  Funcionario.checkLogin(db, req.body.email, req.body.password).then(results =>{
+
+    req.session.user = results;
+    //console.log(results);
+    res.redirect("/index");
+
+  }).catch(error =>{
+    //console.log(error);
+    res.redirect("/login");
+  });
+
+});
+
+router.get("/logout", function(req, res, next){
+
+  delete req.session.user;
+  res.redirect("/login");
+
+});
+
 
 router.get("/registrarFuncionario", function(req, res, next){
 
@@ -62,14 +89,16 @@ router.get("/funcionarios", function(req, res, next){
     // res.send(results);
 
     res.render("listarFuncionarios", {
-      results
+      results,
+      user: req.session.user
     });
 
 
   }).catch(err =>{
 
     res.render("listarFuncionarios", {
-      err
+      err,
+      user: req.session.user
     });
 
   });
@@ -88,14 +117,18 @@ router.get("/perguntas", function(req, res, next){
     // res.send(results);
 
     res.render("listarPerguntas", {
-      results
+      title: "Projeto Chazelle",
+      results,
+      user: req.session.user
     });
 
 
   }).catch(err =>{
 
     res.render("listarPerguntas", {
-      err
+      title: "Projeto Chazelle",
+      err,
+      user: req.session.user
     });
 
   });
@@ -104,13 +137,19 @@ router.get("/perguntas", function(req, res, next){
 
 router.get("/cadastrarFuncionario", function(req, res, next){
 
-  res.render("cadFuncionario");
+  res.render("cadFuncionario", {
+    title: 'Projeto Chazelle',
+    user: req.session.user
+  });
 
 });
 
 router.get("/cadastrarPergunta", function(req, res, next){
 
-  res.render("cadPergunta");
+  res.render("cadPergunta", {
+    title: 'Projeto Chazelle',
+    user: req.session.user
+  });
 
 });
 
@@ -142,7 +181,9 @@ router.get('/ola', function(req, res, next) {
 //rota destinada a pagina de chat
 router.get("/:nomeEmpresa", function(req, res, next){
 
-  res.render("chatbot");
+  res.render("chatbot", {
+    title: "chatbot"
+  });
 
 });
 

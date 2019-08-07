@@ -1,6 +1,32 @@
 class Funcionario{
 
     constructor(){}
+    
+    static checkLogin(db, email, senha){
+
+        return new Promise((resolve, reject) =>{
+
+            let results = db.database().collection("Funcionarios")
+                .where("email_funcionario", "==", email).where("senha_funcionario", "==", senha);
+
+                console.log(results);
+            
+                results.get().then(function(querySnapshot) {
+                    if (querySnapshot.size > 0) {
+                      // Contents of first document
+                      resolve(querySnapshot.docs[0].data());
+                    } else {
+                      reject("Nenhum usuário encontrado");
+                    }
+                  })
+                  .catch(function(error) {
+                    reject("Error getting document: ", error);
+                  });
+
+
+        });
+
+    }
 
     getFuncionario(db, cpf){
 

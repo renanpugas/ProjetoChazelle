@@ -64,3 +64,8 @@ obs: delete apenas na classe Funcionario
 
 #06/08
 - Views Lister Funcionarios e Listar Perguntas exibindo informações vindas do banco de dados
+- Integração das views Login, Registrar Empresa e Registrar funcionário com o programa
+
+#07/08
+- Criação de sessões no projeto
+- Implementação do login
