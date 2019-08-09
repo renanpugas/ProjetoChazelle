@@ -10,6 +10,16 @@ var rivescript = require("rivescript");
 var fs = require("fs");
 
 
+router.use(function(req, res, next){
+
+  if(["/login", "/registrarFuncionario", "/registrarEmpresa"].indexOf(req.url) === -1 && !req.session.user) {
+      res.redirect("/login");
+  } else {
+      next();
+  }
+
+});
+
 /* GET home page. */
 router.get('/', function(req, res, next) {
   
@@ -79,7 +89,7 @@ router.get("/registrarEmpresa", function(req, res, next){
 
 router.get("/funcionarios", function(req, res, next){
 
-  Funcionario.getAllFunctionarios(db).then(results =>{
+  Funcionario.getAllFunctionarios(db, req.session.user.CNPJ_empresa).then(results =>{
 
     // results.forEach(oi =>{
     //   console.log(oi.data());
@@ -179,14 +189,6 @@ router.get('/ola', function(req, res, next) {
   
 });
 
-//rota destinada a pagina de chat
-router.get("/:nomeEmpresa", function(req, res, next){
-
-  res.render("chatbot", {
-    title: "chatbot"
-  });
-
-});
 
 /* rotas para consulta*/
 router.get("/funcionario/:cpf", function(req, res, next){
@@ -265,6 +267,7 @@ router.get("/perguntas/:cnpj", function(req, res, next){
   })
 
 });
+
 
 /* rotas para cadastro */
 router.post("/funcionario", function(req, res, next){

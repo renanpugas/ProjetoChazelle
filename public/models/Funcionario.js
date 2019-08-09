@@ -54,11 +54,11 @@ class Funcionario{
 
     }
 
-    static getAllFunctionarios(db){
+    static getAllFunctionarios(db, cnpj){
 
         return new Promise((resolve, reject) =>{
 
-                db.database().collection("Funcionarios").get().then(function(querySnapshot) {
+                db.database().collection("Funcionarios").where("CNPJ_empresa", "==", cnpj).get().then(function(querySnapshot) {
                     if (querySnapshot.size > 0) {
                       // Contents of first document
                       resolve(querySnapshot.docs);
