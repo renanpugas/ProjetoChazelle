@@ -69,3 +69,6 @@ obs: delete apenas na classe Funcionario
 #07/08
 - Criação de sessões no projeto
 - Implementação do login
+
+#08/08
+- View Cadastrar Funcionario cadastrando informações no banco de dados

@@ -90,7 +90,8 @@ router.get("/funcionarios", function(req, res, next){
 
     res.render("listarFuncionarios", {
       results,
-      user: req.session.user
+      user: req.session.user,
+      title: "Funcionários"
     });
 
 
@@ -270,13 +271,18 @@ router.post("/funcionario", function(req, res, next){
 
   let func = new Funcionario();
 
+  console.log(req.body.nome);
+
   func.save(db, {
-    CNPJ_empresa: req.body.CNPJ,
+    nome_funcionario: req.body.nome,
+    CNPJ_empresa: req.body.cnpj,
     CPF_funcionario: req.body.cpf,
-    isAdministrator_funcionario: req.body.isAdministrator,
-    nome_funcionario: req.body.nome
+    email_funcionario: req.body.email,
+    senha_funcionario: req.body.senha,
+    isAdministrator_funcionario: req.body.administrator,
+    
   }).then(result =>{
-    res.send("funfou");
+    res.redirect("/funcionarios");
   }).catch(err =>{
     console.log(err);
     res.send(err);

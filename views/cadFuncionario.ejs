@@ -17,13 +17,13 @@
                             <strong>Preencha o formulário para cadastrar um funcionário para a empresa</strong>
                         </div>
                         <div class="card-body card-block" style="padding-bottom: 0.2rem">
-                            <form action="" method="post" enctype="multipart/form-data" class="form-horizontal">
+                            <form action="/funcionario" method="post" class="form-horizontal">
                                 <div class="row form-group">
                                     <div class="col col-md-3">
                                         <label for="text-input" class=" form-control-label">Nome</label>
                                     </div>
                                     <div class="col-12 col-md-9">
-                                        <input type="text" id="text-input" name="text-input" placeholder="Digite o nome do funcionário" class="form-control">
+                                        <input type="text" id="nome" name="nome" placeholder="Digite o nome do funcionário" class="form-control" required>
                                     </div>
                                 </div>
                                 <div class="row form-group">
@@ -31,7 +31,7 @@
                                         <label for="email-input" class=" form-control-label">Email</label>
                                     </div>
                                     <div class="col-12 col-md-9">
-                                        <input type="email" id="email-input" name="email-input" placeholder="Digite o email do funcionário" class="form-control">
+                                        <input type="email" id="email" name="email" placeholder="Digite o email do funcionário" class="form-control" required>
                                     </div>
                                 </div>
                                 <div class="row form-group">
@@ -39,7 +39,7 @@
                                         <label for="password-input" class=" form-control-label">CPF</label>
                                     </div>
                                     <div class="col-12 col-md-9">
-                                        <input type="text" id="password-input" name="password-input" placeholder="Digite o CPF do funcionário" class="form-control">
+                                        <input type="text" id="cpf" name="cpf" placeholder="Digite o CPF do funcionário" class="form-control" required>
                                     </div>
                                 </div>
                                 <div class="row form-group">
@@ -47,7 +47,7 @@
                                         <label for="password-input" class=" form-control-label">Senha</label>
                                     </div>
                                     <div class="col-12 col-md-9">
-                                        <input type="password" id="password-input" name="password-input" placeholder="Digite a senha" class="form-control">
+                                        <input type="password" id="senha" name="senha" placeholder="Digite a senha" class="form-control" required>
                                     </div>
                                 </div>
                                 <div class="row form-group">
@@ -55,22 +55,26 @@
                                         <label for="password-input" class=" form-control-label">Confirme a Senha</label>
                                     </div>
                                     <div class="col-12 col-md-9">
-                                        <input type="password" id="password-input" name="password-input" placeholder="Confirme a senha" class="form-control">
+                                        <input type="password" id="confirm-senha" name="confirm-senha" placeholder="Confirme a senha" class="form-control" required>
+                                        <input type="checkbox" id="administrator" name="administrator" value="false" class="form-check-input" style="visibility: hidden" checked>
+                                        <input type="text" id="cnpj" name="cnpj" class="form-control" value="<%= user.CNPJ_empresa %>" style="visibility: hidden">
                                     </div>
                                 </div>
                                 <div class="row form-group">
+                                        <div class="card-footer">     
+                                            <button type="submit" class="btn btn-primary btn-sm">
+                                                <i class="fa fa-chevron-right"></i> Enviar
+                                            </button>
+                                            <button type="reset" class="btn btn-danger btn-sm">
+                                                <i class="fa fa-ban"></i> Limpar Campos
+                                            </button>
+                                        </div>
                                 </div>
                             </form>
                         </div>
-                        <div class="card-footer">
-                            <button type="submit" class="btn btn-primary btn-sm">
-                                <i class="fa fa-chevron-right"></i> Enviar
-                            </button>
-                            <button type="reset" class="btn btn-danger btn-sm">
-                                <i class="fa fa-ban"></i> Limpar Campos
-                            </button>
-                        </div>
+                        
                     </div>
             </div>
 
+<script src="js/cadFuncionario.js"></script>
 <%- include("inc/footer") -%>
