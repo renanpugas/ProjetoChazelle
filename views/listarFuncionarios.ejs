@@ -65,7 +65,7 @@
                     </thead>
                     <tbody>
                         <% results.forEach(row =>{ %> 
-                        <tr class="tr-shadow" data-row="<%= JSON.stringify(row.data()) %>" data-id="<%= row.id %>">
+                        <tr class="tr-shadow" data-cpf="<%= row.id %>">
                             <td></td>
                             <td> <%= row.data().nome_funcionario %> </td>
                             <td>

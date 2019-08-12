@@ -118,7 +118,7 @@ router.get("/funcionarios", function(req, res, next){
 
 router.get("/perguntas", function(req, res, next){
 
-  pergunta.getAllPerguntas(db, "4o0zhjwVQQo3wUFNyFuK").then(results =>{
+  pergunta.getAllPerguntas(db, req.session.user.CNPJ_empresa).then(results =>{
 
     // results.forEach(oi =>{
     //   console.log(oi.data());
@@ -314,23 +314,19 @@ router.post("/pergunta", function(req, res, next){
   let perg = new pergunta();
 
   perg.save(db, {
-    CNPJ_pergunta: req.body.CNPJ,
+    CNPJ_pergunta: req.session.user.CNPJ_empresa,
     enunciado_pergunta: req.body.enunciado,
-    pergunta_rive: req.body.perguntaRive,
+    //pergunta_rive: req.body.perguntaRive,
     resposta_pergunta: req.body.resposta
-  }).then(results => {
-    res.send(results);
+  }).then(result =>{
+    res.redirect("/perguntas");
   }).catch(err =>{
+    console.log(err);
     res.send(err);
   });
 
 });
 
-router.post("/empresa/:nome", function(req, res, next){
-
-  fs.app
-
-});
 
 /* rotas para atualização */
 router.post("/funcionario/:id", function(req, res, next){

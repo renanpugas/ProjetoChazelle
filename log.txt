@@ -77,3 +77,7 @@ obs: delete apenas na classe Funcionario
 - Restrição de acesso a todas as paginas
 - Criação da rota de chat
 - View Funcionarios trazendo do banco de dados apenas os funcionarios referentes a empresa do usuario logado
+
+#12/08
+- View Cadastrar Pergunta mandando dados para o banco de dados
+- View Perguntas trazendo do banco de dados apenas as perguntas referentes a empresa do usuario logado 
