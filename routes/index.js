@@ -12,7 +12,7 @@ var fs = require("fs");
 
 router.use(function(req, res, next){
 
-  if(["/login", "/registrarFuncionario", "/registrarEmpresa"].indexOf(req.url) === -1 && !req.session.user) {
+  if(["/login", "/registrarFuncionario", "/saveFuncionario", "/registrarEmpresa"].indexOf(req.url) === -1 && !req.session.user) {
       res.redirect("/login");
   } else {
       next();
@@ -274,7 +274,7 @@ router.post("/funcionario", function(req, res, next){
 
   let func = new Funcionario();
 
-  console.log(req.body.nome);
+  //console.log(req.body.nome);
 
   func.save(db, {
     nome_funcionario: req.body.nome,
@@ -293,18 +293,54 @@ router.post("/funcionario", function(req, res, next){
 
 });
 
-router.post("/empresa", function(req, res, next){
+router.post("/registrarEmpresa", function(req, res, next){
 
   let empresa = new Empresa();
 
   empresa.save(db, {
     CNPJ_empresa: req.body.CNPJ,
     nome_empresa: req.body.nome,
+    email_empresa: req.body.email,
     ramo_empresa: req.body.ramo
   }).then(result =>{
-    res.send(result);
+
+    let func = new Funcionario();
+
+    //console.log(req.body.nome);
+
+    func.save(db, {
+      nome_funcionario: req.session.funcionario.nome,
+      CNPJ_empresa: req.body.CNPJ,
+      CPF_funcionario: req.session.funcionario.CPF,
+      email_funcionario: req.session.funcionario.email,
+      senha_funcionario: req.session.funcionario.senha,
+      isAdministrator_funcionario: req.session.funcionario.administrator,
+      
+    }).then(result =>{
+
+      delete req.session.funcionario;
+      res.redirect("/");
+
+    }).catch(err =>{
+
+      console.log(err);
+
+      res.render("regEmpresa", {
+        err: "Houve um erro ao cadastrar os dados!",
+        title: ""
+      });
+
+    });
+
   }).catch(err =>{
-    res.send(err);
+
+    console.log(err);
+
+    res.render("regEmpresa", {
+      err: "Houve um erro ao cadastrar os dados!",
+      title: ""
+    });
+
   });
 
 });
@@ -415,6 +451,15 @@ router.delete("/pergunta/:id", function(req, res, next){
     res.send(err);
 
   });
+
+});
+
+/* rotas para auxilio de trafego de informações*/
+router.post("/saveFuncionario", function(req, res, next){
+
+  req.session.funcionario = Object.assign({administrator: "true"}, req.body);
+
+  res.redirect("/registrarEmpresa");
 
 });
 

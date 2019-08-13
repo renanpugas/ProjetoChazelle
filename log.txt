@@ -80,4 +80,7 @@ obs: delete apenas na classe Funcionario
 
 #12/08
 - View Cadastrar Pergunta mandando dados para o banco de dados
-- View Perguntas trazendo do banco de dados apenas as perguntas referentes a empresa do usuario logado 
+- View Perguntas trazendo do banco de dados apenas as perguntas referentes a empresa do usuario logado
+
+#13/08
+- Cadastro de novos usuários e empresas funcionando 
