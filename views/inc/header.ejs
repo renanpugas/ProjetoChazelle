@@ -149,6 +149,7 @@
                             <a href="chart.html">
                                 <i class="fas fa-chart-bar"></i>Funcionários</a>
                         </li>
+                        <% if(user.isAdministrator_funcionario == "true"){ %>
                         <li class="has-sub">
                             <a class="js-arrow" href="#">
                                 <i class="fas fa-group"></i>Funcionários</a>
@@ -161,6 +162,7 @@
                                 </li>
                             </ul>
                         </li>
+                        <% } %>
                         <li class="has-sub">
                             <a class="js-arrow" href="#">
                                 <i class="fas fa-question-circle"></i>Perguntas</a>
@@ -174,7 +176,7 @@
                             </ul>
                         </li>
                         <li>
-                            <a href="chatPage.html">
+                            <a href="/chat/chatPage">
                                 <i class="fas fa-comments"></i>Chatbot</a>
                         </li>
                         <li>

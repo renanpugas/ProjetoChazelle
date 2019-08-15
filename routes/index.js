@@ -9,13 +9,37 @@ const replace = require('replace-in-file');
 var rivescript = require("rivescript");
 var fs = require("fs");
 
+router.get("/chat/:nomeEmpresa", function(req, res, next){
+
+  let empresa = new Empresa();
+
+  let nomeEmpresa = req.params.nomeEmpresa;
+
+  empresa.getEmpresaByName(db, nomeEmpresa).then(results =>{
+
+    res.render("chatbot", {
+      title: "chatbot",
+      results
+    });
+
+  }).catch(err =>{
+
+    res.send(err);
+
+  });
+
+});
 
 router.use(function(req, res, next){
 
   if(["/login", "/registrarFuncionario", "/saveFuncionario", "/registrarEmpresa"].indexOf(req.url) === -1 && !req.session.user) {
-      res.redirect("/login");
+
+    res.redirect("/login");
+
   } else {
-      next();
+
+    next();
+
   }
 
 });
