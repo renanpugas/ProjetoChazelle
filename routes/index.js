@@ -30,6 +30,217 @@ router.get("/chat/:nomeEmpresa", function(req, res, next){
 
 });
 
+/* rotas para arquivos rive*/
+
+router.post("/empresas/rive/:id", function(req, res, next){
+
+  var bot = new rivescript();
+  var resposta = "";
+
+  bot.loadFile(`./rive_files/${req.params.id}.rive`).then(loading_done).catch(loading_error);
+
+  function loading_done() {
+    console.log("Bot has finished loading!");
+   
+    // Now the replies must be sorted!
+    bot.sortReplies();
+   
+    // And now we're free to get a reply from the brain!
+   
+    // RiveScript remembers user data by their username and can tell
+    // multiple users apart.
+    let username = "local-user";
+   
+    // NOTE: the API has changed in v2.0.0 and returns a Promise now.
+    bot.reply(username, req.body.pergunta).then(function(reply) {
+      console.log("The bot says: " + reply);
+      let pao = reply;
+      //res.send(`Pergunta: ${req.body.pergunta}<br>Bot Responde: ${pao}`);
+      res.send(JSON.stringify(pao));
+    }).catch(error =>{
+      res.send(error);
+    });
+  }
+   
+  // It's good to catch errors too!
+  function loading_error(error, filename, lineno) {
+    console.log("Error when loading files: " + error);
+    res.send(error);
+  }
+
+});
+
+router.post("/empresa/rive/:id", function(req, res, next){
+
+  fs.appendFile(`./rive_files/${req.params.id}.rive`, "ola \r\n", err =>{
+
+    if(err) res.send(err);
+
+    res.send("Dados adicionados com sucesso");
+
+  });
+
+});
+
+// Altera pergunta e resposta no arquivo .rive
+router.put("/empresa/rive/:id", function(req, res, next){
+
+  var pergOriginal = req.body.perguntaOriginal;
+  var respOriginal = req.body.respostaOriginal;
+  var pergNova = req.body.perguntaNova;
+  var respNova = req.body.respostaNova
+  var regex = new RegExp("\\+" + pergOriginal + "\\n\\-" + respOriginal, "g");
+
+  let options1 = {
+    files: `rive_files/${req.params.id}.rive`,
+    from: regex,
+    to: `+${pergNova}\n-${respNova}`,
+  };
+
+  console.log(regex);
+
+  replace(options1).then(results => {
+
+    //const changedFiles = results.filter(result => result.hasChanged).map(result => result.file);
+
+    let fileHasChanged = JSON.stringify(results);
+    fileHasChanged.includes(`"hasChanged":false`) ? console.log("false") : console.log("true");
+
+    let ola = JSON.stringify(results).replace("[", "").replace("]", "").replace(`"f`, "f").replace(`e"`, "e").replace(`"h`, "h").replace(`d"`, "d").replace("{", "").replace("}", "");
+    //let oi = JSON.parse(ola);
+    //oi.replace("]", "");
+    //let ola = JSON.parse(oi);
+    console.log(fileHasChanged);
+
+    res.send(results);
+    
+  })
+  .catch(error => {
+    console.error('Error occurred:', error);
+  });
+
+});
+
+// Exclui pergunta no arquivo .rive
+router.delete("/empresa/rive/:id", function(req, res, next){
+
+  var teste1 = req.body.perguntaOriginal;
+  var teste2 = req.body.respostaOriginal;
+  var regex = new RegExp("\\+" + teste1 + "\\n\\-" + teste2, "g");
+
+  let options1 = {
+    files: `rive_files/${req.params.id}.rive`,
+    from: regex,
+    to: "",
+  };
+
+  console.log(regex);
+
+  replace(options1).then(results => {
+
+    //const changedFiles = results.filter(result => result.hasChanged).map(result => result.file);
+
+    let fileHasChanged = JSON.stringify(results);
+    fileHasChanged.includes(`"hasChanged":false`) ? console.log("false") : console.log("true");
+
+    let ola = JSON.stringify(results).replace("[", "").replace("]", "").replace(`"f`, "f").replace(`e"`, "e").replace(`"h`, "h").replace(`d"`, "d").replace("{", "").replace("}", "");
+    //let oi = JSON.parse(ola);
+    //oi.replace("]", "");
+    //let ola = JSON.parse(oi);
+    console.log(fileHasChanged);
+
+    res.send(results);
+    
+  })
+  .catch(error => {
+    console.error('Error occurred:', error);
+  });
+
+});
+
+router.get("/paocomovo", function(req, res, next){
+
+  fs.readFile('rive_files/leroymerlin.rive', 'utf8', (err, data) => {
+    if(err) {
+        console.log('An error occured', err);
+    }
+
+    // const regex = new RegExp('/\+\' + "oi" + '\n\-\', 'i');
+
+    // /\+\oi\n\-\oila/g
+    let backgroundColorToReplace = data.replace(/\+\oi\n\-\oila/g, "+oila\n-pao");
+
+    fs.writeFile('rive_files/leroymerlin.rive', backgroundColorToReplace, (err) => {
+        if(err) {
+             console.log('An error occured', err);
+        }
+
+        console.log('Colors successfully changed');
+    });
+});
+
+
+
+var lineReader = require('readline').createInterface({
+  input: require('fs').createReadStream('rive_files/leroymerlin.rive'),
+});
+
+lineReader.on('line', function (line) {
+  //ws.write("oi");
+  console.log('Line from file:', line);
+});
+
+
+
+res.send("oi");
+
+
+});
+
+
+router.get("/testeRive", function(req, res, next){
+
+  var teste1 = "oi";
+  var teste2 = "oila"
+  var regex = new RegExp("\\+\\" + teste1 + "\\n\\-\\" + teste2, "g");
+
+  const options = {
+    files: 'rive_files/leroymerlin.rive',
+    from: /\+\oi\n\-\oila/g,
+    to: '+pao\n-vaiCorinthians',
+  };
+
+
+  replace(options)
+  .then(results => {
+
+    const changedFiles = results
+  .filter(result => result.hasChanged)
+  .map(result => result.file);
+
+
+    let fileHasChanged = JSON.stringify(results);
+    fileHasChanged.includes(`"hasChanged":false`) ? console.log("false") : console.log("true");
+
+    let ola = JSON.stringify(results).replace("[", "").replace("]", "").replace(`"f`, "f").replace(`e"`, "e").replace(`"h`, "h").replace(`d"`, "d").replace("{", "").replace("}", "");
+    //let oi = JSON.parse(ola);
+    //oi.replace("]", "");
+    //let ola = JSON.parse(oi);
+    console.log(fileHasChanged);
+
+    res.send(results);
+    
+  })
+  .catch(error => {
+    console.error('Error occurred:', error);
+  });
+
+});
+
+router.post("/empresa/rive/:id", function(req, res, next){
+
+});
+
 router.use(function(req, res, next){
 
   if(["/login", "/registrarFuncionario", "/saveFuncionario", "/registrarEmpresa"].indexOf(req.url) === -1 && !req.session.user) {
@@ -487,215 +698,6 @@ router.post("/saveFuncionario", function(req, res, next){
 
 });
 
-/* rotas para arquivos rive*/
 
-router.get("/empresa/rive/:id", function(req, res, next){
-
-  var bot = new rivescript();
-  var resposta = "";
-
-  bot.loadFile(`./rive_files/${req.params.id}.rive`).then(loading_done).catch(loading_error);
-
-  function loading_done() {
-    console.log("Bot has finished loading!");
-   
-    // Now the replies must be sorted!
-    bot.sortReplies();
-   
-    // And now we're free to get a reply from the brain!
-   
-    // RiveScript remembers user data by their username and can tell
-    // multiple users apart.
-    let username = "local-user";
-   
-    // NOTE: the API has changed in v2.0.0 and returns a Promise now.
-    bot.reply(username, req.body.pergunta).then(function(reply) {
-      console.log("The bot says: " + reply);
-      let pao = reply;
-      res.send(`Pergunta: ${req.body.pergunta}<br>
-            Bot Responde: ${pao}`);
-    }).catch(error =>{
-      res.send(error);
-    });
-  }
-   
-  // It's good to catch errors too!
-  function loading_error(error, filename, lineno) {
-    console.log("Error when loading files: " + error);
-    res.send(error);
-  }
-
-});
-
-router.post("/empresa/rive/:id", function(req, res, next){
-
-  fs.appendFile(`./rive_files/${req.params.id}.rive`, "ola \r\n", err =>{
-
-    if(err) res.send(err);
-
-    res.send("Dados adicionados com sucesso");
-
-  });
-
-});
-
-// Altera pergunta e resposta no arquivo .rive
-router.put("/empresa/rive/:id", function(req, res, next){
-
-  var pergOriginal = req.body.perguntaOriginal;
-  var respOriginal = req.body.respostaOriginal;
-  var pergNova = req.body.perguntaNova;
-  var respNova = req.body.respostaNova
-  var regex = new RegExp("\\+" + pergOriginal + "\\n\\-" + respOriginal, "g");
-
-  let options1 = {
-    files: `rive_files/${req.params.id}.rive`,
-    from: regex,
-    to: `+${pergNova}\n-${respNova}`,
-  };
-
-  console.log(regex);
-
-  replace(options1).then(results => {
-
-    //const changedFiles = results.filter(result => result.hasChanged).map(result => result.file);
-
-    let fileHasChanged = JSON.stringify(results);
-    fileHasChanged.includes(`"hasChanged":false`) ? console.log("false") : console.log("true");
-
-    let ola = JSON.stringify(results).replace("[", "").replace("]", "").replace(`"f`, "f").replace(`e"`, "e").replace(`"h`, "h").replace(`d"`, "d").replace("{", "").replace("}", "");
-    //let oi = JSON.parse(ola);
-    //oi.replace("]", "");
-    //let ola = JSON.parse(oi);
-    console.log(fileHasChanged);
-
-    res.send(results);
-    
-  })
-  .catch(error => {
-    console.error('Error occurred:', error);
-  });
-
-});
-
-// Exclui pergunta no arquivo .rive
-router.delete("/empresa/rive/:id", function(req, res, next){
-
-  var teste1 = req.body.perguntaOriginal;
-  var teste2 = req.body.respostaOriginal;
-  var regex = new RegExp("\\+" + teste1 + "\\n\\-" + teste2, "g");
-
-  let options1 = {
-    files: `rive_files/${req.params.id}.rive`,
-    from: regex,
-    to: "",
-  };
-
-  console.log(regex);
-
-  replace(options1).then(results => {
-
-    //const changedFiles = results.filter(result => result.hasChanged).map(result => result.file);
-
-    let fileHasChanged = JSON.stringify(results);
-    fileHasChanged.includes(`"hasChanged":false`) ? console.log("false") : console.log("true");
-
-    let ola = JSON.stringify(results).replace("[", "").replace("]", "").replace(`"f`, "f").replace(`e"`, "e").replace(`"h`, "h").replace(`d"`, "d").replace("{", "").replace("}", "");
-    //let oi = JSON.parse(ola);
-    //oi.replace("]", "");
-    //let ola = JSON.parse(oi);
-    console.log(fileHasChanged);
-
-    res.send(results);
-    
-  })
-  .catch(error => {
-    console.error('Error occurred:', error);
-  });
-
-});
-
-router.get("/paocomovo", function(req, res, next){
-
-  fs.readFile('rive_files/leroymerlin.rive', 'utf8', (err, data) => {
-    if(err) {
-        console.log('An error occured', err);
-    }
-
-    // const regex = new RegExp('/\+\' + "oi" + '\n\-\', 'i');
-
-    // /\+\oi\n\-\oila/g
-    let backgroundColorToReplace = data.replace(/\+\oi\n\-\oila/g, "+oila\n-pao");
-
-    fs.writeFile('rive_files/leroymerlin.rive', backgroundColorToReplace, (err) => {
-        if(err) {
-             console.log('An error occured', err);
-        }
-
-        console.log('Colors successfully changed');
-    });
-});
-
-
-
-var lineReader = require('readline').createInterface({
-  input: require('fs').createReadStream('rive_files/leroymerlin.rive'),
-});
-
-lineReader.on('line', function (line) {
-  //ws.write("oi");
-  console.log('Line from file:', line);
-});
-
-
-
-res.send("oi");
-
-
-});
-
-
-router.get("/testeRive", function(req, res, next){
-
-  var teste1 = "oi";
-  var teste2 = "oila"
-  var regex = new RegExp("\\+\\" + teste1 + "\\n\\-\\" + teste2, "g");
-
-  const options = {
-    files: 'rive_files/leroymerlin.rive',
-    from: /\+\oi\n\-\oila/g,
-    to: '+pao\n-vaiCorinthians',
-  };
-
-
-  replace(options)
-  .then(results => {
-
-    const changedFiles = results
-  .filter(result => result.hasChanged)
-  .map(result => result.file);
-
-
-    let fileHasChanged = JSON.stringify(results);
-    fileHasChanged.includes(`"hasChanged":false`) ? console.log("false") : console.log("true");
-
-    let ola = JSON.stringify(results).replace("[", "").replace("]", "").replace(`"f`, "f").replace(`e"`, "e").replace(`"h`, "h").replace(`d"`, "d").replace("{", "").replace("}", "");
-    //let oi = JSON.parse(ola);
-    //oi.replace("]", "");
-    //let ola = JSON.parse(oi);
-    console.log(fileHasChanged);
-
-    res.send(results);
-    
-  })
-  .catch(error => {
-    console.error('Error occurred:', error);
-  });
-
-});
-
-router.post("/empresa/rive/:id", function(req, res, next){
-
-})
 
 module.exports = router;
