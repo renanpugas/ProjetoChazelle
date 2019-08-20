@@ -87,3 +87,9 @@ obs: delete apenas na classe Funcionario
 
 #15/08
 - Começo de ajustes na view Chabot 
+
+#19/08
+- View Chatbot recebendo e enviando mensagens
+
+#20/08
+- Scroll automático configurado na view Chatbot

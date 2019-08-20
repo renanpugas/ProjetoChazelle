@@ -42,7 +42,8 @@ document.querySelector(".btn-enviar").addEventListener("click", e=>{
             `;
         document.querySelector(".send-mess-wrap").appendChild(resposta);
         console.log(json);
-        document.querySelector(".chat").scrollTop = document.querySelector(".chat").scrollHeight;
+        document.querySelector(".chat-scroll").scrollTop = document.querySelector(".chat").scrollHeight;
+        inputPergunta.value = "";
 
     })
     .catch(err => {
