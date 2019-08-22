@@ -23,6 +23,7 @@ document.querySelector(".btn-enviar").addEventListener("click", e=>{
 
         let resposta = document.createElement("div");
         resposta.classList.add("send-mess__inner");
+        resposta.dataset.pergunta = inputPergunta.value;
         resposta.innerHTML = `
             <div class="send-mess-list">                            
             </div>
@@ -41,6 +42,12 @@ document.querySelector(".btn-enviar").addEventListener("click", e=>{
             </div>
             `;
         document.querySelector(".send-mess-wrap").appendChild(resposta);
+        resposta.querySelector(".fa-thumbs-up").addEventListener("click", e =>{
+            console.log("Like");
+        });
+        resposta.querySelector(".fa-thumbs-down").addEventListener("click", e =>{
+            console.log("Dislike");
+        });
         console.log(json);
         document.querySelector(".chat-scroll").scrollTop = document.querySelector(".chat").scrollHeight;
         inputPergunta.value = "";
@@ -52,3 +59,9 @@ document.querySelector(".btn-enviar").addEventListener("click", e=>{
     });
 
 });
+
+function addEventLike(){
+
+    
+
+}

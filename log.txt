@@ -93,3 +93,6 @@ obs: delete apenas na classe Funcionario
 
 #20/08
 - Scroll automático configurado na view Chatbot
+
+#21/08
+- Adicionado eventos de clique nos botões de like e dislike na view Chatbot
