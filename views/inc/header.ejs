@@ -149,7 +149,7 @@
                             <a href="chart.html">
                                 <i class="fas fa-chart-bar"></i>Funcionários</a>
                         </li>
-                        <% if(user.isAdministrator_funcionario == "true"){ %>
+                        <% if(user.isAdministrator_funcionario == "true" || user.isAdministrator_funcionario == true){ %>
                         <li class="has-sub">
                             <a class="js-arrow" href="#">
                                 <i class="fas fa-group"></i>Funcionários</a>

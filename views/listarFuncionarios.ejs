@@ -74,10 +74,10 @@
                             <td class="desc"><%= row.data().CPF_funcionario %></td>
                             <td>
                                 <div class="table-data-feature">
-                                    <button class="item" data-toggle="tooltip" data-placement="top" title="" data-original-title="Editar">
+                                    <button class="item btn-edit" data-toggle="tooltip" data-placement="top" title="" data-original-title="Editar">
                                         <i class="zmdi zmdi-edit"></i>
                                     </button>
-                                    <button class="item" data-toggle="tooltip" data-placement="top" title="" data-original-title="Excluir">
+                                    <button class="item btn-delete" data-toggle="tooltip" data-placement="top" title="" data-original-title="Excluir">
                                         <i class="zmdi zmdi-delete"></i>
                                     </button>
                                 </div>
@@ -148,5 +148,6 @@
         </div>
     </div>
 
+    <script src="/js/listarFuncionarios.js"></script>
 <%- include("inc/footer") -%>
 

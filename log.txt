@@ -28,7 +28,7 @@ obs: delete apenas na classe Funcionario
 - Ajustes nas rotas de criação e alteração
 
 #19/07
-- Criação rota get para arquivos river
+- Criação rota get para arquivos rive
 
 #22/07
 - Testes para substituir valores nos arquivos rive
@@ -96,3 +96,6 @@ obs: delete apenas na classe Funcionario
 
 #21/08
 - Adicionado eventos de clique nos botões de like e dislike na view Chatbot
+
+#22/08
+- View listarFuncionarios realizando exclusão
