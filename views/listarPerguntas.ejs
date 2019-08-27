@@ -38,7 +38,10 @@
                         </div>
                         <div class="table-data__tool-right">
                             <button class="au-btn au-btn-icon au-btn--green au-btn--small">
-                                <i class="zmdi zmdi-plus"></i>Cadastrar Pergunta</button>
+                                <a href="/cadastrarPergunta" style="color:inherit;">
+                                    <i class="zmdi zmdi-plus"></i>Cadastrar Pergunta
+                                </a>
+                            </button>
                             <div class="rs-select2--dark rs-select2--sm rs-select2--dark2">
                                 <select class="js-select2 select2-hidden-accessible" name="type" tabindex="-1" aria-hidden="true">
                                     <option selected="selected">Export</option>
@@ -62,16 +65,16 @@
                             <tbody>
                                 <% results.forEach(row =>{ %>
                                 <% console.log(row) %>
-                                <tr class="tr-shadow">
+                                <tr class="tr-shadow" data-id="<%= row.id %>">
                                     <td><%= row.data().enunciado_pergunta %></td>
                                     <td><%= row.data().resposta_pergunta %></td>
                                     <td class="process">4.2</td>
                                     <td>
                                         <div class="table-data-feature">
-                                            <button class="item" data-toggle="tooltip" data-placement="top" title="" data-original-title="Editar">
+                                            <button class="item btn-edit" data-toggle="tooltip" data-placement="top" title="" data-original-title="Editar">
                                                 <i class="zmdi zmdi-edit"></i>
                                             </button>
-                                            <button class="item" data-toggle="tooltip" data-placement="top" title="" data-original-title="Excluir">
+                                            <button class="item btn-delete" data-toggle="tooltip" data-placement="top" title="" data-original-title="Excluir">
                                                 <i class="zmdi zmdi-delete"></i>
                                             </button>
                                         </div>
@@ -132,5 +135,7 @@
                     <!-- END DATA TABLE -->
                 </div>
             </div>
+
+    <script src="/js/listarPerguntas.js"></script>
 
 <%- include("inc/footer") -%>

@@ -83,7 +83,7 @@ class Pergunta{
             db.database().collection("Perguntas").doc(id).get().then((docSnapshot) => {
                 if (docSnapshot.exists) {
 
-                db.database().collection("Funcionarios").doc(id).delete()
+                db.database().collection("Perguntas").doc(id).delete()
                     .then(() =>{
                         resolve("Dados excluidos com sucesso");
                     })

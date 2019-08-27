@@ -99,3 +99,6 @@ obs: delete apenas na classe Funcionario
 
 #22/08
 - View listarFuncionarios realizando exclusão
+
+#27/08
+- View listarPerguntas realizando exclusão
