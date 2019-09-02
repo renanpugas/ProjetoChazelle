@@ -102,3 +102,8 @@ obs: delete apenas na classe Funcionario
 
 #27/08
 - View listarPerguntas realizando exclusão
+
+#02/09
+- Criação view editarPergunta
+- Criação rota editarPergunta
+- View editarPergunta recebendo dados

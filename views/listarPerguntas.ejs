@@ -65,7 +65,7 @@
                             <tbody>
                                 <% results.forEach(row =>{ %>
                                 <% console.log(row) %>
-                                <tr class="tr-shadow" data-id="<%= row.id %>">
+                                <tr class="tr-shadow" data-id="<%= row.id %>" data-pergunta="<%= row.data().enunciado_pergunta %>" data-resposta="<%= row.data().resposta_pergunta %>">
                                     <td><%= row.data().enunciado_pergunta %></td>
                                     <td><%= row.data().resposta_pergunta %></td>
                                     <td class="process">4.2</td>

@@ -399,6 +399,18 @@ router.get("/cadastrarPergunta", function(req, res, next){
 
 });
 
+router.get("/editarPergunta", function(req, res, next){
+
+    res.render("edtPergunta", {
+      title: 'Projeto Chazelle',
+      user: req.session.user,
+      pergEnunciado: req.query.enunciado,
+      pergResposta: req.query.resposta,
+      pergId: req.query.id
+    });
+
+});
+
 router.get('/ola', function(req, res, next) {
 
   // let func = new Funcionario();

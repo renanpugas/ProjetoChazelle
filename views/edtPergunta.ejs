@@ -1,0 +1,83 @@
+<%- include("inc/head") -%>
+<%- include("inc/header") -%>
+
+    <!-- MAIN CONTENT-->
+    <div class="main-content">
+        <div class="section__content section__content--p30">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="overview-wrap">
+                            <h2 class="title-1">Cadastrar Pergunta</h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="card m-t-20">
+                            <div class="card-header">
+                                <strong>Preencha o formulário para cadastrar uma pergunta para o chatbot da empresa</strong>
+                            </div>
+                            <div class="card-body card-block" style="padding-bottom: 0.2rem">
+                                <form action="/pergunta" method="post" class="form-horizontal">
+                                    <div class="row form-group">
+                                        <div class="col col-md-3">
+                                            <label for="text-input" class=" form-control-label">Pergunta</label>
+                                        </div>
+                                        <div class="col-12 col-md-9">
+                                            <textarea name="enunciado" id="enunciado" rows="6" placeholder="Digite o enunciado da pergunta" class="form-control" maxlength="255"><%= pergEnunciado %></textarea>
+                                            <small class="form-text text-muted enunciado">No máximo 255 caracteres</small>
+                                        </div>
+                                    </div>
+                                    <div class="row form-group">
+                                        <div class="col col-md-3">
+                                            <label for="email-input" class=" form-control-label">Resposta</label>
+                                        </div>
+                                        <div class="col-12 col-md-9">
+                                            <textarea name="resposta" id="resposta" rows="6" placeholder="Digite a resposta da pergunta" class="form-control" maxlength="255"><%= pergResposta %></textarea>
+                                            <small class="form-text text-muted resposta">No máximo 255 caracteres</small>
+                                        </div>
+                                    </div>
+                                    <div class="row form-group">
+                                        <div class="col-12 col-md-9">
+                                            <button type="button" class="btn btn-success">Adicionar nova resposta</button>
+                                        </div>
+                                    </div>
+                                    <div class="row form-group">
+                                        <div class="card-footer col-12 col-md-9">     
+                                            <button type="submit" class="btn btn-primary btn-sm">
+                                                <i class="fa fa-chevron-right"></i> Enviar
+                                            </button>
+                                            <button type="reset" class="btn btn-danger btn-sm">
+                                                <i class="fa fa-ban"></i> Limpar Campos
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                </div>
+
+<script>
+
+    document.querySelector("textarea#enunciado").addEventListener("keyup", e=>{
+
+        let textAreaEnunciado = document.querySelector("small.enunciado");
+
+        let caracteresRestantes = (255 - e.currentTarget.value.length);
+
+        textAreaEnunciado.innerHTML = `${caracteresRestantes} caracteres restantes`;
+
+    });
+
+    document.querySelector("textarea#resposta").addEventListener("keyup", e=>{
+
+        let textAreaEnunciado = document.querySelector("small.resposta");
+
+        let caracteresRestantes = (255 - e.currentTarget.value.length);
+
+        textAreaEnunciado.innerHTML = `${caracteresRestantes} caracteres restantes`;
+
+    });
+
+</script>
+
+<%- include("inc/footer") -%>
