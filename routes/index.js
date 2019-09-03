@@ -400,7 +400,6 @@ router.get("/cadastrarPergunta", function(req, res, next){
 });
 
 router.get("/editarPergunta", function(req, res, next){
-
     res.render("edtPergunta", {
       title: 'Projeto Chazelle',
       user: req.session.user,
@@ -650,14 +649,15 @@ router.post("/pergunta/:id", function(req, res, next){
 
   let perg = new pergunta();
 
-  perg.save(db, req.params.id, {
-    CNPJ_pergunta: req.body.CNPJ,
+  perg.update(db, req.params.id, {
+    CNPJ_pergunta: req.session.user.CNPJ_empresa,
     enunciado_pergunta: req.body.enunciado,
-    pergunta_rive: req.body.perguntaRive,
+    //pergunta_rive: req.body.perguntaRive,
     resposta_pergunta: req.body.resposta
   }).then(results => {
-    res.send(results);
+    res.redirect("/perguntas");
   }).catch(err =>{
+    console.log(err.message);
     res.send(err);
   });
 

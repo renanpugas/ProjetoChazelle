@@ -17,7 +17,7 @@
                                 <strong>Preencha o formulário para cadastrar uma pergunta para o chatbot da empresa</strong>
                             </div>
                             <div class="card-body card-block" style="padding-bottom: 0.2rem">
-                                <form action="/pergunta" method="post" class="form-horizontal">
+                                <form action="/pergunta/<%= pergId %>" method="post" class="form-horizontal">
                                     <div class="row form-group">
                                         <div class="col col-md-3">
                                             <label for="text-input" class=" form-control-label">Pergunta</label>
@@ -56,28 +56,6 @@
                         </div>
                 </div>
 
-<script>
-
-    document.querySelector("textarea#enunciado").addEventListener("keyup", e=>{
-
-        let textAreaEnunciado = document.querySelector("small.enunciado");
-
-        let caracteresRestantes = (255 - e.currentTarget.value.length);
-
-        textAreaEnunciado.innerHTML = `${caracteresRestantes} caracteres restantes`;
-
-    });
-
-    document.querySelector("textarea#resposta").addEventListener("keyup", e=>{
-
-        let textAreaEnunciado = document.querySelector("small.resposta");
-
-        let caracteresRestantes = (255 - e.currentTarget.value.length);
-
-        textAreaEnunciado.innerHTML = `${caracteresRestantes} caracteres restantes`;
-
-    });
-
-</script>
+    <script src="/js/edtPergunta.js"></script>
 
 <%- include("inc/footer") -%>
