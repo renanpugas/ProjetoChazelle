@@ -110,3 +110,6 @@ obs: delete apenas na classe Funcionario
 
 #03/09
 - View editarPergunta atualizando dados
+
+#05/09
+- View cadastrarPergunta adicionando perguntas no arquivo rive

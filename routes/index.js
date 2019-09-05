@@ -70,13 +70,16 @@ router.post("/empresas/rive/:id", function(req, res, next){
 
 });
 
-router.post("/empresa/rive/:id", function(req, res, next){
+router.get("/pergunta/rive/:CNPJ", function(req, res, next){
 
-  fs.appendFile(`./rive_files/${req.params.id}.rive`, "ola \r\n", err =>{
+  let riveString = `+${req.session.enunciado} \r\n-${req.session.resposta}`;
+  fs.appendFile(`./rive_files/${req.params.CNPJ}.rive`, riveString, err =>{
 
     if(err) res.send(err);
 
-    res.send("Dados adicionados com sucesso");
+    res.redirect("/perguntas");
+
+    //res.send("Dados adicionados com sucesso");
 
   });
 
@@ -478,9 +481,9 @@ router.get("/empresas", function(req, res, next){
 
   Empresa.getAllEmpresas(db).then(results =>{
 
-    results.forEach(oi =>{
-      console.log(oi.data());
-    });
+    // results.forEach(oi =>{
+    //   console.log(oi.data());
+    // });
 
     //res.send(results[0].id);
     res.send(results);
@@ -498,9 +501,9 @@ router.get("/perguntas/:cnpj", function(req, res, next){
 
   pergunta.getAllPerguntas(db, req.params.cnpj).then(results =>{
 
-    results.forEach(oi =>{
-      console.log(oi.data());
-    });
+    // results.forEach(oi =>{
+    //   console.log(oi.data());
+    // });
 
     // res.send(results[0].data());
     res.send(results);
@@ -601,7 +604,9 @@ router.post("/pergunta", function(req, res, next){
     //pergunta_rive: req.body.perguntaRive,
     resposta_pergunta: req.body.resposta
   }).then(result =>{
-    res.redirect("/perguntas");
+    req.session.enunciado = req.body.enunciado;
+    req.session.resposta = req.body.resposta;
+    res.redirect(`/pergunta/rive/${req.session.user.CNPJ_empresa}`);
   }).catch(err =>{
     console.log(err);
     res.send(err);

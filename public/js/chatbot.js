@@ -13,7 +13,7 @@ document.querySelector(".btn-enviar").addEventListener("click", e=>{
 
     document.querySelector(".send-mess-wrap").appendChild(mensagem);
     
-    fetch("/empresas/rive/NBA", {
+    fetch("/empresas/rive/84848748484", {
         method: 'post',
         body: `pergunta=${inputPergunta.value}`,
         headers: { 'Content-type': 'application/x-www-form-urlencoded' }
