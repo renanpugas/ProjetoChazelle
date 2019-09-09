@@ -11,7 +11,7 @@ class Empresa{
             let results = db.database().collection("Empresas")
                 .where("CNPJ_empresa", "==", cnpj);
 
-                console.log(results);
+                //console.log(results);
             
                 results.get().then(function(querySnapshot) {
                     if (querySnapshot.size > 0) {
@@ -36,7 +36,7 @@ class Empresa{
           let results = db.database().collection("Empresas")
               .where("nome_empresa", "==", nome);
 
-              console.log(results);
+              //console.log(results);
           
               results.get().then(function(querySnapshot) {
                   if (querySnapshot.size > 0) {

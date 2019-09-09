@@ -51,7 +51,7 @@ class Pergunta{
             
             db.database().collection("Perguntas").add(data)
             .then(result =>{
-                resolve("Dados adicionados");
+                resolve(result);
             })
             .catch(error =>{
                 reject(error);

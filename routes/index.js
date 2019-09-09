@@ -70,12 +70,22 @@ router.post("/empresas/rive/:id", function(req, res, next){
 
 });
 
+// Cadastra pergunta no arquivo .rive
 router.get("/pergunta/rive/:CNPJ", function(req, res, next){
 
-  let riveString = `+${req.session.enunciado} \r\n-${req.session.resposta}`;
+  let riveString = `\n+${req.session.enunciado} \r\n-${req.session.resposta}`;
   fs.appendFile(`./rive_files/${req.params.CNPJ}.rive`, riveString, err =>{
 
     if(err) res.send(err);
+
+    let perg = new pergunta();
+    perg.update(db, req.session.idPergunta, {
+      pergunta_rive: riveString
+    })
+
+    delete req.session.enunciado;
+    delete req.session.resposta;
+    delete req.session.idPergunta;
 
     res.redirect("/perguntas");
 
@@ -606,6 +616,7 @@ router.post("/pergunta", function(req, res, next){
   }).then(result =>{
     req.session.enunciado = req.body.enunciado;
     req.session.resposta = req.body.resposta;
+    req.session.idPergunta = result.id;
     res.redirect(`/pergunta/rive/${req.session.user.CNPJ_empresa}`);
   }).catch(err =>{
     console.log(err);
