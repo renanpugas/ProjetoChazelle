@@ -9,13 +9,13 @@ const replace = require('replace-in-file');
 var rivescript = require("rivescript");
 var fs = require("fs");
 
-router.get("/chat/:nomeEmpresa", function(req, res, next){
+router.get("/chat/:cnpjEmpresa", function(req, res, next){
 
   let empresa = new Empresa();
 
-  let nomeEmpresa = req.params.nomeEmpresa;
+  let cnpjEmpresa = req.params.cnpjEmpresa;
 
-  empresa.getEmpresaByName(db, nomeEmpresa).then(results =>{
+  empresa.getEmpresa(db, cnpjEmpresa).then(results =>{
 
     res.render("chatbot", {
       title: "chatbot",

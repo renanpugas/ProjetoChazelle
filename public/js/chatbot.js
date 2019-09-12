@@ -1,4 +1,6 @@
 var inputPergunta = document.querySelector(".input-pergunta");
+var cnpj = document.querySelector(".cnpj_empresa").outerText;
+
 
 document.querySelector(".btn-enviar").addEventListener("click", e=>{
     e.preventDefault();
@@ -13,7 +15,7 @@ document.querySelector(".btn-enviar").addEventListener("click", e=>{
 
     document.querySelector(".send-mess-wrap").appendChild(mensagem);
     
-    fetch("/empresas/rive/84848748484", {
+    fetch(`/empresas/rive/${cnpj}`, {
         method: 'post',
         body: `pergunta=${inputPergunta.value}`,
         headers: { 'Content-type': 'application/x-www-form-urlencoded' }

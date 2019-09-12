@@ -116,3 +116,6 @@ obs: delete apenas na classe Funcionario
 
 #09/09
 - View cadastrarPergunta adicionando código rive da pergunta no banco de dados
+
+#12/09
+- Ajustes na rota chat
