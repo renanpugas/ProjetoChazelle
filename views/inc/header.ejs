@@ -128,8 +128,10 @@
                 <nav class="navbar-sidebar">
                     <ul class="list-unstyled navbar__list">
                         <li class="active has-sub">
-                            <a class="js-arrow" href="#">
+                            
+                            <a class="js-arrow" href="/index">
                                 <i class="fas fa-tachometer-alt"></i>Dashboard</a>
+                            <!--
                             <ul class="list-unstyled navbar__sub-list js-sub-list">
                                 <li>
                                     <a href="/index">Dashboard 1</a>
@@ -144,11 +146,14 @@
                                     <a href="index4.html">Dashboard 4</a>
                                 </li>
                             </ul>
+                            -->
                         </li>
+                        <!--
                         <li>
                             <a href="chart.html">
                                 <i class="fas fa-chart-bar"></i>Funcionários</a>
                         </li>
+                        -->
                         <% if(user.isAdministrator_funcionario == "true" || user.isAdministrator_funcionario == true){ %>
                         <li class="has-sub">
                             <a class="js-arrow" href="#">
@@ -179,6 +184,7 @@
                             <a href="/chat/<%= user.CNPJ_empresa %>">
                                 <i class="fas fa-comments"></i>Chatbot</a>
                         </li>
+                        <!--
                         <li>
                             <a href="map.html">
                                 <i class="fas fa-map-marker-alt"></i>Maps</a>
@@ -197,7 +203,7 @@
                                     <a href="forget-pass.html">Forget Password</a>
                                 </li>
                             </ul>
-                        </li>
+                        </li>                        
                         <li class="has-sub">
                             <a class="js-arrow" href="#">
                                 <i class="fas fa-desktop"></i>UI Elements</a>
@@ -237,6 +243,7 @@
                                 </li>
                             </ul>
                         </li>
+                        -->
                     </ul>
                 </nav>
             </div>

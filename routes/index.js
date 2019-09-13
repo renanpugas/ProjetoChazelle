@@ -254,6 +254,87 @@ router.post("/empresa/rive/:id", function(req, res, next){
 
 });
 
+router.get("/registrarFuncionario", function(req, res, next){
+
+  res.render("regFuncionario", {
+    title: "Registrar Funcionário - Projeto Chazelle"
+  });
+
+});
+
+router.get("/registrarEmpresa", function(req, res, next){
+
+  res.render("regEmpresa", {
+    title: "Registrar Empresa - Projeto Chazelle"
+  });
+
+});
+
+/* rota para auxilio de trafego de informações*/
+router.post("/saveFuncionario", function(req, res, next){
+
+  req.session.funcionario = Object.assign({administrator: "true"}, req.body);
+
+  res.redirect("/registrarEmpresa");
+
+});
+
+router.post("/registrarEmpresa", function(req, res, next){
+
+  let empresa = new Empresa();
+
+  empresa.save(db, {
+    CNPJ_empresa: req.body.CNPJ,
+    nome_empresa: req.body.nome,
+    email_empresa: req.body.email,
+    ramo_empresa: req.body.ramo
+  }).then(result =>{
+
+    let func = new Funcionario();
+
+    //console.log(req.body.nome);
+
+    func.save(db, {
+      nome_funcionario: req.session.funcionario.nome,
+      CNPJ_empresa: req.body.CNPJ,
+      CPF_funcionario: req.session.funcionario.CPF,
+      email_funcionario: req.session.funcionario.email,
+      senha_funcionario: req.session.funcionario.senha,
+      isAdministrator_funcionario: req.session.funcionario.administrator,
+      
+    }).then(result =>{
+      // console.log(req.session.funcionario);
+
+      // req.session.user = req.session.funcionario,
+
+      delete req.session.funcionario;
+      
+      res.redirect("/login");
+
+    }).catch(err =>{
+
+      console.log(err);
+
+      res.render("regEmpresa", {
+        err: "Houve um erro ao cadastrar os dados!",
+        title: ""
+      });
+
+    });
+
+  }).catch(err =>{
+
+    console.log(err);
+
+    res.render("regEmpresa", {
+      err: "Houve um erro ao cadastrar os dados!",
+      title: ""
+    });
+
+  });
+
+});
+
 router.use(function(req, res, next){
 
   if(["/login", "/registrarFuncionario", "/saveFuncionario", "/registrarEmpresa"].indexOf(req.url) === -1 && !req.session.user) {
@@ -318,22 +399,6 @@ router.get("/logout", function(req, res, next){
 
 });
 
-
-router.get("/registrarFuncionario", function(req, res, next){
-
-  res.render("regFuncionario", {
-    title: "Registrar Funcionário - Projeto Chazelle"
-  });
-
-});
-
-router.get("/registrarEmpresa", function(req, res, next){
-
-  res.render("regEmpresa", {
-    title: "Registrar Empresa - Projeto Chazelle"
-  });
-
-});
 
 router.get("/funcionarios", function(req, res, next){
 
@@ -552,57 +617,6 @@ router.post("/funcionario", function(req, res, next){
 
 });
 
-router.post("/registrarEmpresa", function(req, res, next){
-
-  let empresa = new Empresa();
-
-  empresa.save(db, {
-    CNPJ_empresa: req.body.CNPJ,
-    nome_empresa: req.body.nome,
-    email_empresa: req.body.email,
-    ramo_empresa: req.body.ramo
-  }).then(result =>{
-
-    let func = new Funcionario();
-
-    //console.log(req.body.nome);
-
-    func.save(db, {
-      nome_funcionario: req.session.funcionario.nome,
-      CNPJ_empresa: req.body.CNPJ,
-      CPF_funcionario: req.session.funcionario.CPF,
-      email_funcionario: req.session.funcionario.email,
-      senha_funcionario: req.session.funcionario.senha,
-      isAdministrator_funcionario: req.session.funcionario.administrator,
-      
-    }).then(result =>{
-
-      delete req.session.funcionario;
-      res.redirect("/");
-
-    }).catch(err =>{
-
-      console.log(err);
-
-      res.render("regEmpresa", {
-        err: "Houve um erro ao cadastrar os dados!",
-        title: ""
-      });
-
-    });
-
-  }).catch(err =>{
-
-    console.log(err);
-
-    res.render("regEmpresa", {
-      err: "Houve um erro ao cadastrar os dados!",
-      title: ""
-    });
-
-  });
-
-});
 
 router.post("/pergunta", function(req, res, next){
 
@@ -716,16 +730,6 @@ router.delete("/pergunta/:id", function(req, res, next){
   });
 
 });
-
-/* rotas para auxilio de trafego de informações*/
-router.post("/saveFuncionario", function(req, res, next){
-
-  req.session.funcionario = Object.assign({administrator: "true"}, req.body);
-
-  res.redirect("/registrarEmpresa");
-
-});
-
 
 
 module.exports = router;
