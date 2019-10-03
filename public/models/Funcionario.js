@@ -9,7 +9,7 @@ class Funcionario{
             let results = db.database().collection("Funcionarios")
                 .where("email_funcionario", "==", email).where("senha_funcionario", "==", senha);
 
-                console.log(results);
+                //console.log(results);
             
                 results.get().then(function(querySnapshot) {
                     if (querySnapshot.size > 0) {
@@ -35,7 +35,7 @@ class Funcionario{
             let results = db.database().collection("Funcionarios")
                 .where("CPF_funcionario", "==", cpf);
 
-                console.log(results);
+                //console.log(results);
             
                 results.get().then(function(querySnapshot) {
                     if (querySnapshot.size > 0) {

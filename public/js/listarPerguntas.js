@@ -4,6 +4,10 @@
 
         fetch(`/pergunta/${tr.dataset.id}`, {
             method: 'delete',
+            body: {
+                enunciado: tr.dataset.pergunta,
+                resposta: tr.dataset.resposta
+            }
           })
         .then(response => {
             

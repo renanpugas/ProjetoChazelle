@@ -16,4 +16,10 @@
         });
     });
 
+    tr.querySelector(".btn-edit").addEventListener("click", e=>{
+
+        window.location.href = `/editarPergunta/?id=${tr.dataset.id}&enunciado=${tr.dataset.pergunta}&resposta=${tr.dataset.resposta}`;
+
+    });
+
 })

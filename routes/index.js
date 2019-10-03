@@ -137,8 +137,10 @@ router.put("/empresa/rive/:id", function(req, res, next){
 // Exclui pergunta no arquivo .rive
 router.delete("/empresa/rive/:id", function(req, res, next){
 
-  var teste1 = req.body.perguntaOriginal;
-  var teste2 = req.body.respostaOriginal;
+  var teste1 = req.body.enunciado;
+  var teste2 = req.body.resposta;
+  console.log("teste1" + teste1);
+  debbuger;
   var regex = new RegExp("\\+" + teste1 + "\\n\\-" + teste2, "g");
 
   let options1 = {
@@ -168,6 +170,8 @@ router.delete("/empresa/rive/:id", function(req, res, next){
   .catch(error => {
     console.error('Error occurred:', error);
   });
+
+
 
 });
 
