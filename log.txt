@@ -119,3 +119,6 @@ obs: delete apenas na classe Funcionario
 
 #12/09
 - Ajustes na rota chat
+
+#06/10
+- Rotas Rive sendo substituidas por uma classe Rive

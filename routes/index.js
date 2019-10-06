@@ -5,7 +5,8 @@ var db = new firestore();
 var pergunta = require("./../public/models/Pergunta");
 var Funcionario = require("./../public/models/Funcionario");
 var Empresa = require("./../public/models/Empresa");
-const replace = require('replace-in-file');
+var rive = require("./../public/js/rive.js");
+var replace = require('replace-in-file');
 var rivescript = require("rivescript");
 var fs = require("fs");
 
@@ -635,7 +636,13 @@ router.post("/pergunta", function(req, res, next){
     req.session.enunciado = req.body.enunciado;
     req.session.resposta = req.body.resposta;
     req.session.idPergunta = result.id;
-    res.redirect(`/pergunta/rive/${req.session.user.CNPJ_empresa}`);
+
+    rive.insert(req.body.enunciado, req.body.resposta, req.session.user.CNPJ_empresa).then(()=>{
+      res.redirect("/perguntas");
+    }).catch((err)=>{
+      res.redirect("/perguntas");
+    });
+
   }).catch(err =>{
     console.log(err);
     res.send(err);
@@ -682,6 +689,17 @@ router.post("/empresa/:id", function(req, res, next){
 router.post("/pergunta/:id", function(req, res, next){
 
   let perg = new pergunta();
+  let pergOriginal;
+
+  perg.getPergunta(db, req.params.id).then((result)=>{
+
+    pergOriginal = result;
+
+  }).catch((err)=>{
+
+    console.log(error);
+
+  });
 
   perg.update(db, req.params.id, {
     CNPJ_pergunta: req.session.user.CNPJ_empresa,
@@ -689,7 +707,11 @@ router.post("/pergunta/:id", function(req, res, next){
     //pergunta_rive: req.body.perguntaRive,
     resposta_pergunta: req.body.resposta
   }).then(results => {
-    res.redirect("/perguntas");
+      rive.update(pergOriginal.enunciado_pergunta, pergOriginal.resposta_pergunta, req.body.enunciado, req.body.resposta, req.session.user.CNPJ_empresa).then(()=>{
+      res.redirect("/perguntas");
+    }).catch((err)=>{
+      console.log(err);
+    });
   }).catch(err =>{
     console.log(err.message);
     res.send(err);
@@ -723,9 +745,25 @@ router.delete("/pergunta/:id", function(req, res, next){
 
   let perg = new pergunta();
 
+  let pergResp;
+
+  perg.getPergunta(db, req.params.id).then((result)=>{
+
+    pergResp = result;
+
+  }).catch((err)=>{
+
+    console.log(error);
+
+  });
+
   perg.delete(db, req.params.id).then((results) =>{
 
-    res.send(results);
+    rive.delete(pergResp.enunciado_pergunta, pergResp.resposta_pergunta, req.session.user.CNPJ_empresa).then(()=>{
+      res.redirect("/perguntas");
+    }).catch((err)=>{
+      console.log(err);
+    });
 
   }).catch(err =>{
 
