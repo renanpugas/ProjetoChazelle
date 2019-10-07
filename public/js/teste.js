@@ -1,7 +1,6 @@
 const replace = require('replace-in-file');
 var rivescript = require("rivescript");
 var fs = require("fs");
-var chalk = require("chalk");
 
 class Rive {
 
@@ -11,7 +10,7 @@ class Rive {
             console.log("arquivo rive afasfksfosfjaiofsajsfiojsfioasfjiasf", pergunta, resposta, CNPJ);
 
             let riveString = `\n+${pergunta}\r\n-${resposta}`;
-            fs.appendFile(`rive_files/${CNPJ}.rive`, riveString, err =>{
+            fs.appendFile(`../../rive_files/${CNPJ}.rive`, riveString, err =>{
 
                 console.log(err);
                 if(err) reject(err);
@@ -26,21 +25,16 @@ class Rive {
 
         return new Promise((resolve, reject)=>{
 
-            console.log(perguntaOriginal, "perguntaOriginal");
-            console.log(respostaOriginal, "respostaOriginal");
-            console.log(perguntaNova, );
-            console.log(respostaNova, );
-
             var pergunta = perguntaOriginal;
             var resposta = respostaOriginal;
             
-            var regex = new RegExp("\\+" + perguntaOriginal + "\\r\\n\\-" + respostaOriginal, "g");
+            var regex = new RegExp("\\+" + pergunta + "\\r\\n\\-" + resposta, "g");
             console.log(regex);
 
             let options1 = {
-                files: `rive_files/${CNPJ}.rive`,
+                files: `../../rive_files/${CNPJ}.rive`,
                 from: regex,
-                to: `+${perguntaNova}\r\n-${respostaNova}`
+                to: `+${perguntaNova}\r\n-${respostaNova}`,
             };
 
             replace(options1).then(results => {
@@ -56,7 +50,6 @@ class Rive {
                 resolve();                
             })
             .catch(error => {
-                console.log(chalk.red.inverse(error));
                 reject(error);
             });
 
@@ -102,17 +95,17 @@ class Rive {
 
 }
 
-// // Rive.insert("teste", "troca de texto","84848748484").then(()=>{
+// Rive.insert("teste", "troca de texto","84848748484").then(()=>{
 
-// // }).catch(()=>{
+// }).catch(()=>{
 
-// // });
-
-// Rive.update("teste", "troca de texto", "teste", "para trocar texto", "84848748484")
-// .then(()=>{
-//     console.log(results);
-// }).catch((err)=>{
-//     console.log(err);
 // });
+
+Rive.update("teste", "troca de texto", "teste", "para vai corinthians", "84848748484")
+.then(()=>{
+    console.log(results);
+}).catch((err)=>{
+    console.log(err);
+});
 
 module.exports = Rive;

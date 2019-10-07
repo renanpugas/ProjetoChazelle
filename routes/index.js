@@ -9,6 +9,7 @@ var rive = require("./../public/js/rive.js");
 var replace = require('replace-in-file');
 var rivescript = require("rivescript");
 var fs = require("fs");
+var chalk = require("chalk");
 
 router.get("/chat/:cnpjEmpresa", function(req, res, next){
 
@@ -689,11 +690,28 @@ router.post("/empresa/:id", function(req, res, next){
 router.post("/pergunta/:id", function(req, res, next){
 
   let perg = new pergunta();
-  let pergOriginal;
+  let pergResp;
 
   perg.getPergunta(db, req.params.id).then((result)=>{
 
-    pergOriginal = result;
+    pergResp = result;
+    console.log(pergResp);
+
+      perg.update(db, req.params.id, {
+        CNPJ_pergunta: req.session.user.CNPJ_empresa,
+        enunciado_pergunta: req.body.enunciado,
+        //pergunta_rive: req.body.perguntaRive,
+        resposta_pergunta: req.body.resposta
+      }).then(results => {
+          rive.update(pergResp.enunciado_pergunta, pergResp.resposta_pergunta, req.body.enunciado, req.body.resposta, req.session.user.CNPJ_empresa).then(()=>{
+          res.redirect("/perguntas");
+        }).catch((err)=>{
+          console.log(err);
+        });
+      }).catch(err =>{
+        console.log(err.message);
+        res.send(err);
+      });
 
   }).catch((err)=>{
 
@@ -701,21 +719,6 @@ router.post("/pergunta/:id", function(req, res, next){
 
   });
 
-  perg.update(db, req.params.id, {
-    CNPJ_pergunta: req.session.user.CNPJ_empresa,
-    enunciado_pergunta: req.body.enunciado,
-    //pergunta_rive: req.body.perguntaRive,
-    resposta_pergunta: req.body.resposta
-  }).then(results => {
-      rive.update(pergOriginal.enunciado_pergunta, pergOriginal.resposta_pergunta, req.body.enunciado, req.body.resposta, req.session.user.CNPJ_empresa).then(()=>{
-      res.redirect("/perguntas");
-    }).catch((err)=>{
-      console.log(err);
-    });
-  }).catch(err =>{
-    console.log(err.message);
-    res.send(err);
-  });
 
 });
 
