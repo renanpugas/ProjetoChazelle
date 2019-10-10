@@ -103,6 +103,70 @@ class Pergunta{
 
     }
 
+    addLike(db, resposta){
+
+        return new Promise((resolve, reject)=>{
+
+            db.database().collection("Perguntas").where("resposta_pergunta", "==", resposta).get().then((querySnapshot)=> {
+                if (querySnapshot.size > 0) {
+
+                    let questao = querySnapshot.docs[0].id;
+                    let numLikes = querySnapshot.docs[0].data().likes_pergunta;
+                    numLikes++;
+
+                    db.database().collection("Perguntas").doc(questao).update({likes_pergunta: numLikes})
+                    .then(results =>{
+                        resolve("Dados atualizados com sucesso");
+                    })
+                    .catch(err =>{
+                        reject(err);
+                    });
+
+                } else {
+                  reject("No such document!");
+                }
+
+              })
+              .catch(function(error) {
+                reject("Error getting document: ", error);
+              });
+
+        });
+
+    }
+
+    addDislike(db, resposta){
+
+        return new Promise((resolve, reject)=>{
+
+            db.database().collection("Perguntas").where("resposta_pergunta", "==", resposta).get().then((querySnapshot)=> {
+                if (querySnapshot.size > 0) {
+
+                    let questao = querySnapshot.docs[0].id;
+                    let numDislikes = querySnapshot.docs[0].data().dislikes_pergunta;
+                    numDislikes++;
+
+                    db.database().collection("Perguntas").doc(questao).update({dislikes_pergunta: numDislikes})
+                    .then(results =>{
+                        resolve("Dados atualizados com sucesso");
+                    })
+                    .catch(err =>{
+                        reject(err);
+                    });
+
+                } else {
+                  reject("No such document!");
+                }
+
+              })
+              .catch(function(error) {
+                reject("Error getting document: ", error);
+              });
+
+        });
+
+    }
+
 }
 
 module.exports = Pergunta;

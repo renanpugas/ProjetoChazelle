@@ -32,6 +32,38 @@ router.get("/chat/:cnpjEmpresa", function(req, res, next){
 
 });
 
+router.post("/pergunta/like", (req, res, next)=>{
+
+  let perg = new pergunta();
+
+  console.log(req.body);
+
+  perg.addLike(db, req.body.resposta).then(()=>{
+    res.send("Funfou");
+
+  }).catch((error)=>{
+    console.log(error);
+    res.send("Não funfou");
+  });
+
+});
+
+router.post("/pergunta/dislike", (req, res, next)=>{
+
+  let perg = new pergunta();
+  
+  console.log(req.body);
+
+  perg.addDislike(db, req.body.resposta).then(()=>{
+    res.send("Funfou");
+
+  }).catch((error)=>{
+    console.log(error);
+    res.send("Não funfou");
+  });
+
+});
+
 /* rotas para arquivos rive*/
 
 router.post("/empresas/rive/:id", function(req, res, next){
@@ -719,9 +751,7 @@ router.post("/pergunta/:id", function(req, res, next){
 
   });
 
-
 });
-
 
 /* rotas para exclusão */
 router.delete("/funcionario/:id", function(req, res, next){

@@ -45,11 +45,40 @@ document.querySelector(".btn-enviar").addEventListener("click", e=>{
             `;
         document.querySelector(".send-mess-wrap").appendChild(resposta);
         resposta.querySelector(".fa-thumbs-up").addEventListener("click", e =>{
-            console.log("Like");
+
+            let textoResposta = e.target.parentElement.parentElement.parentElement.querySelector(".send-mess").outerText;
+            console.log(textoResposta);
+            fetch(`/pergunta/like`, {
+                method: 'post',
+                body: `resposta=${textoResposta}`,
+                headers: { 'Content-type': 'application/x-www-form-urlencoded' }
+              })
+            .then(response => {
+                console.log("Funfou");
+            })
+            .catch(err => {
+                console.error('Failed retrieving information', err);
+            });
+
         });
         resposta.querySelector(".fa-thumbs-down").addEventListener("click", e =>{
-            console.log("Dislike");
+
+            let textoResposta = e.target.parentElement.parentElement.parentElement.querySelector(".send-mess").outerText;
+            console.log(textoResposta);
+            fetch(`/pergunta/dislike`, {
+                method: 'post',
+                body: `resposta=${textoResposta}`,
+                headers: { 'Content-type': 'application/x-www-form-urlencoded' }
+              })
+            .then(response => {
+                console.log("Funfou");
+            })
+            .catch(err => {
+                console.error('Failed retrieving information', err);
+            });
+            
         });
+
         console.log(json);
         document.querySelector(".chat-scroll").scrollTop = document.querySelector(".chat").scrollHeight;
         inputPergunta.value = "";
@@ -62,8 +91,3 @@ document.querySelector(".btn-enviar").addEventListener("click", e=>{
 
 });
 
-function addEventLike(){
-
-    
-
-}

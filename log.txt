@@ -122,3 +122,6 @@ obs: delete apenas na classe Funcionario
 
 #06/10
 - Rotas Rive sendo substituidas por uma classe Rive
+
+#10/10
+- Botões de like e dislike funcionando no chat
