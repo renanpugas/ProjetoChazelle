@@ -15,7 +15,7 @@ Primeiramente as depedências do projeto devem ser instaladas dentro da pasta on
 $ npm install
 ```
 
-Com as depêndencias já instaladas, já é possível executar o projeto:
+Com as depêndencias já instaladas é possível executar o projeto:
 
 ```
 $ npm start
