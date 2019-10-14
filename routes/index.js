@@ -664,7 +664,9 @@ router.post("/pergunta", function(req, res, next){
     CNPJ_pergunta: req.session.user.CNPJ_empresa,
     enunciado_pergunta: req.body.enunciado,
     //pergunta_rive: req.body.perguntaRive,
-    resposta_pergunta: req.body.resposta
+    resposta_pergunta: req.body.resposta,
+    likes_pergunta: 0,
+    dislikes_pergunta: 0
   }).then(result =>{
     req.session.enunciado = req.body.enunciado;
     req.session.resposta = req.body.resposta;
