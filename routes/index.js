@@ -11,6 +11,7 @@ var rivescript = require("rivescript");
 var fs = require("fs");
 var chalk = require("chalk");
 
+
 router.get("/chat/:cnpjEmpresa", function(req, res, next){
 
   let empresa = new Empresa();
@@ -649,8 +650,13 @@ router.post("/funcionario", function(req, res, next){
   }).then(result =>{
     res.redirect("/funcionarios");
   }).catch(err =>{
-    console.log(err);
-    res.send(err);
+    console.log("fasjiofjasiasfjasiojasfioasjioasfjoasfijiaso ", err);
+    res.render("cadFuncionario", {
+      title: 'Projeto Chazelle',
+      user: req.session.user,
+      error: err
+    });
+
   });
 
 });
@@ -680,7 +686,11 @@ router.post("/pergunta", function(req, res, next){
 
   }).catch(err =>{
     console.log(err);
-    res.send(err);
+    res.render("cadPergunta", {
+      title: "Projeto Chazelle",
+      error: err,
+      user: req.session.user
+    });
   });
 
 });

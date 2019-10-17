@@ -1,3 +1,5 @@
+const validator = require("validator");
+
 class Funcionario{
 
     constructor(){}
@@ -79,13 +81,35 @@ class Funcionario{
 
         return new Promise((resolve, reject)=>{
 
-            db.database().collection("Funcionarios").doc(data.CPF_funcionario).set(data)
-            .then(result =>{
-                resolve("Dados adicionados");
-            })
-            .catch(error =>{
-                reject(error);
-            })
+            let dataValidated = undefined;
+
+            //Validando dados
+            if(!validator.isEmail(data.email_funcionario)){ 
+                dataValidated = false;
+                reject("Email inválido!");
+                return;
+            } else if(data.senha_funcionario.length < 6){ 
+                dataValidated = false;
+                reject("A senha deve conter no mínimo 6 caracteres");
+                return;
+            } else if(dataValidated === undefined) {
+                this.getFuncionario(db, data.CPF_funcionario).then(()=>{
+                    dataValidated = false;
+                    reject("CPF já cadastrado");
+                    return;
+                }).catch(()=>{
+                    db.database().collection("Funcionarios").doc(data.CPF_funcionario).set(data)
+                    .then(result =>{
+                        console.log(result);
+                        resolve("Dados adicionados");
+                    })
+                    .catch(error =>{
+                        console.log(error);
+                        reject(error);
+                    });
+                });
+            }
+               
         });
 
     }

@@ -1,8 +1,4 @@
 class Pergunta{
-
-    construct(database){}
-
-    getEmpresa(){}
     
     static getAllPerguntas(db, cnpj){
 
@@ -25,6 +21,47 @@ class Pergunta{
 
     }
 
+    searchByPergunta(db, cnpj, pergunta){
+
+        return new Promise((resolve, reject)=>{
+
+            let pergRef = db.database().collection("Perguntas");
+
+            pergRef.where('CNPJ_pergunta', '==', cnpj).where('enunciado_pergunta', '==', pergunta).get().then((querySnapshot)=>{
+                if (querySnapshot.size > 0) {
+                    resolve(querySnapshot.docs);
+                } else {
+                    reject("No such document!");
+                }
+                })
+            .catch((error)=> {
+                console.log(error);
+                reject("Error getting document: ", error);
+            });
+        });
+
+    }
+
+    searchByResposta(db, cnpj, resposta){
+
+        return new Promise((resolve, reject)=>{
+
+            let pergRef = db.database().collection("Perguntas");
+
+            pergRef.where('CNPJ_pergunta', '==', cnpj).where('resposta_pergunta', '==', resposta).get().then((querySnapshot)=>{
+                if (querySnapshot.size > 0) {
+                    resolve(querySnapshot.docs);
+                } else {
+                    reject("No such document!");
+                }
+                })
+            .catch((error)=> {
+                console.log(error);
+                reject("Error getting document: ", error);
+            });
+        });
+
+    }
     getPergunta(db, id){
 
         return new Promise((resolve, reject) =>{
@@ -48,14 +85,31 @@ class Pergunta{
     save(db, data){
 
         return new Promise((resolve, reject)=>{
+
+            let dataValidated = undefined;
             
-            db.database().collection("Perguntas").add(data)
-            .then(result =>{
-                resolve(result);
-            })
-            .catch(error =>{
-                reject(error);
-            })
+            if(dataValidated === undefined){
+                this.searchByPergunta(db, data.CNPJ_pergunta, data.enunciado_pergunta).then(()=>{
+                    reject("Já existe uma pergunta cadastrada com o mesmo enunciado");
+                    return;
+                }).catch(()=>{
+                    this.searchByResposta(db, data.CNPJ_pergunta, data.resposta_pergunta).then(()=>{
+                        reject("Já existe uma resposta cadastrada com o mesmo enunciado");
+                        return;
+                    }).catch(()=>{
+                        db.database().collection("Perguntas").add(data)
+                        .then(result =>{
+                            resolve(result);
+                        })
+                        .catch(error =>{
+                            reject(error);
+                        });
+
+                    });
+                    
+                });  
+            }
+
         });
 
     }
@@ -63,6 +117,7 @@ class Pergunta{
     update(db, id, data){
 
         return new Promise((resolve, reject)=>{
+
 
             db.database().collection("Perguntas").doc(id).update(data)
                 .then(results =>{

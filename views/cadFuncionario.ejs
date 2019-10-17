@@ -14,6 +14,11 @@
             </div>
             <div class="card m-t-20">
                         <div class="card-header">
+                            <% if (typeof error === "string") {%>
+                                <div class="alert alert-danger">
+                                        <%= error %>
+                                </div>
+                            <% } %>
                             <strong>Preencha o formulário para cadastrar um funcionário para a empresa</strong>
                         </div>
                         <div class="card-body card-block" style="padding-bottom: 0.2rem">
