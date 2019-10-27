@@ -125,3 +125,11 @@ obs: delete apenas na classe Funcionario
 
 #10/10
 - Botões de like e dislike funcionando no chat
+
+#17/10
+- Adicionado validação de dados para usuarios e perguntas
+
+#27/10
+- Consertado bug na página listar perguntas quando não se tinha nenhuma pergunta cadastrada
+- Tela inicial mostrando numero de perguntas cadastradas, total de avaliações e total de avaliações positivas e negativas
+- Tela inicial trazendo 5 perguntas cadastradas

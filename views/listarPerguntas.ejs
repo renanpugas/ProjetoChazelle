@@ -63,6 +63,10 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                <% if (typeof error === "string") {%>
+                                    
+                                <% } else { %>
+
                                 <% results.forEach(row =>{ %>
                                 <tr class="tr-shadow" data-id="<%= row.id %>" data-pergunta="<%= row.data().enunciado_pergunta %>" data-resposta="<%= row.data().resposta_pergunta %>">
                                     <td><%= row.data().enunciado_pergunta %></td>
@@ -80,54 +84,8 @@
                                     </td>
                                 </tr>
                                 <tr class="spacer"></tr>
-                                <% }); %>
-                                <!-- <tr class="tr-shadow">
-                                    <td>Vamos, vamos corinthians essa noite teremos que ganhar</td>
-                                    <td>Vamos, vamos corinthians essa noite teremos que ganhar pao com ovo pao	</td>
-                                    <td class="process">4.2</td>
-                                    <td>
-                                        <div class="table-data-feature">
-                                            <button class="item" data-toggle="tooltip" data-placement="top" title="" data-original-title="Editar">
-                                                <i class="zmdi zmdi-edit"></i>
-                                            </button>
-                                            <button class="item" data-toggle="tooltip" data-placement="top" title="" data-original-title="Excluir">
-                                                <i class="zmdi zmdi-delete"></i>
-                                            </button>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr class="spacer"></tr>
-                                <tr class="tr-shadow">
-                                    <td>Vamos, vamos corinthians essa noite teremos que ganhar</td>
-                                    <td>Vamos, vamos corinthians essa noite teremos que ganhar pao com ovo pao	</td>
-                                    <td class="process">4.2</td>
-                                    <td>
-                                        <div class="table-data-feature">
-                                            <button class="item" data-toggle="tooltip" data-placement="top" title="" data-original-title="Editar">
-                                                <i class="zmdi zmdi-edit"></i>
-                                            </button>
-                                            <button class="item" data-toggle="tooltip" data-placement="top" title="" data-original-title="Excluir">
-                                                <i class="zmdi zmdi-delete"></i>
-                                            </button>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr class="spacer"></tr>
-                                <tr class="tr-shadow">
-                                    <td>Vamos, vamos corinthians essa noite teremos que ganhar</td>
-                                    <td>Vamos, vamos corinthians essa noite teremos que ganhar pao com ovo pao	</td>
-                                    <td class="denied">2.2</td>
-                                    <td>
-                                        <div class="table-data-feature">
-                                            <button class="item" data-toggle="tooltip" data-placement="top" title="" data-original-title="Editar">
-                                                <i class="zmdi zmdi-edit"></i>
-                                            </button>
-                                            <button class="item" data-toggle="tooltip" data-placement="top" title="" data-original-title="Excluir">
-                                                <i class="zmdi zmdi-delete"></i>
-                                            </button>
-                                        </div>
-                                    </td>
-                                </tr> -->
+                                <% }); }%>
+
                             </tbody>
                         </table>
                     </div>

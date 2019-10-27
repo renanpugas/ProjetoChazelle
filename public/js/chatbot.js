@@ -63,7 +63,7 @@ document.querySelector(".btn-enviar").addEventListener("click", e=>{
         });
         resposta.querySelector(".fa-thumbs-down").addEventListener("click", e =>{
 
-            let textoResposta = e.target.parentElement.parentElement.parentElement.querySelector(".send-mess").outerText;
+            let textoResposta = e.target.parentElement.parentElement.querySelector(".send-mess").outerText;
             console.log(textoResposta);
             fetch(`/pergunta/dislike`, {
                 method: 'post',

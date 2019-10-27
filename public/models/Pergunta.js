@@ -13,9 +13,61 @@ class Pergunta{
                 }
               })
               .catch(function(error) {
-                reject("Error getting document: ", error);
+                  console.log(error);
+                  reject(error);
               });
 
+            });
+
+    }
+
+    static getByLimit(db, cnpj, limit){
+
+        return new Promise((resolve, reject) =>{
+
+            db.database().collection("Perguntas").where("CNPJ_pergunta", "==", cnpj).limit(limit).get().then(function(querySnapshot) {
+                if (querySnapshot.size > 0) {
+                  // Contents of first document
+                  resolve(querySnapshot.docs);
+                } else {
+                  reject("No such document!");
+                }
+              })
+              .catch(function(error) {
+                  console.log(error);
+                  reject(error);
+              });
+
+            });
+
+    }
+
+    count(db, cnpj){
+
+        return new Promise((resolve, reject) =>{
+
+            db.database().collection("Perguntas").where("CNPJ_pergunta", "==", cnpj).get().then((querySnapshot)=> {
+                if (querySnapshot.size > 0) {
+
+                    let countResults = this.countLikesAndDislikes(querySnapshot.docs);
+                    
+                    resolve({
+                        numPerguntas: querySnapshot.size,
+                        numLikes: countResults.likes,
+                        numDislikes: countResults.dislikes,
+                        numTotal: countResults.total
+                    });
+
+                } else {
+
+                  reject("No such document!");
+
+                }
+              })
+              .catch(function(error) {
+                  console.log(error);
+                  reject(error);
+              });
 
             });
 
@@ -220,6 +272,24 @@ class Pergunta{
 
         });
 
+    }
+
+    countLikesAndDislikes(perguntas){
+        let likes = 0;
+        let dislikes = 0;
+
+        perguntas.forEach(row =>{ 
+            likes += row.data().likes_pergunta;
+            dislikes += row.data().dislikes_pergunta;
+        });
+
+        let total = likes + dislikes;
+
+        return {
+            likes,
+            dislikes,
+            total
+        }
     }
 
 }

@@ -391,19 +391,58 @@ router.use(function(req, res, next){
 /* GET home page. */
 router.get('/', function(req, res, next) {
   
-  //req.session.user = "ok";
-  db.database();
-  res.render('index', { title: 'Express' });
+  res.render("index", {
+    title: 'Projeto Chazelle',
+    user: req.session.user
+  });
   
 });
 
 router.get("/index", function(req, res, next){
 
+  let perg = new pergunta();
+
   console.log(req.session.user);
-  res.render("index", {
-    title: 'Projeto Chazelle',
-    user: req.session.user
+
+  pergunta.getByLimit(db, req.session.user.CNPJ_empresa, 5).then(results =>{
+
+    perg.count(db, req.session.user.CNPJ_empresa).then((resultsCount)=>{
+
+      res.render("index", {
+        title: "Projeto Chazelle",
+        results,
+        numPerguntas: resultsCount.numPerguntas,
+        numLikes: resultsCount.numLikes,
+        numDislikes: resultsCount.numDislikes,
+        numTotal: resultsCount.numTotal,
+        user: req.session.user
+      });
+
+    }).catch(()=>{
+
+      res.render("index", {
+        title: "Projeto Chazelle",
+        results,
+        user: req.session.user
+      });
+
+    });
+
+
+  }).catch(err =>{
+
+    res.render("index", {
+      title: "Projeto Chazelle",
+      error: err,
+      user: req.session.user
+    });
+
   });
+
+  // res.render("index", {
+  //   title: 'Projeto Chazelle',
+  //   user: req.session.user
+  // });
 
 });
 
@@ -490,7 +529,7 @@ router.get("/perguntas", function(req, res, next){
 
     res.render("listarPerguntas", {
       title: "Projeto Chazelle",
-      err,
+      error: err,
       user: req.session.user
     });
 

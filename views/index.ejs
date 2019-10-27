@@ -6,15 +6,6 @@
     <div class="main-content">
         <div class="section__content section__content--p30">
             <div class="container-fluid">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="overview-wrap">
-                            <h2 class="title-1">overview</h2>
-                            <button class="au-btn au-btn-icon au-btn--blue">
-                                <i class="zmdi zmdi-plus"></i>add item</button>
-                        </div>
-                    </div>
-                </div>
                 <div class="row m-t-25">
                     <div class="col-sm-6 col-lg-3">
                         <div class="overview-item overview-item--c1">
@@ -24,12 +15,9 @@
                                         <i class="zmdi zmdi-account-o"></i>
                                     </div>
                                     <div class="text">
-                                        <h2>10368</h2>
+                                        <h2><%= numPerguntas %></h2>
                                         <span>Perguntas cadastradas</span>
                                     </div>
-                                </div>
-                                <div class="overview-chart">
-                                    <canvas id="widgetChart1"></canvas>
                                 </div>
                             </div>
                         </div>
@@ -42,12 +30,9 @@
                                         <i class="zmdi zmdi-shopping-cart"></i>
                                     </div>
                                     <div class="text">
-                                        <h2>388,688</h2>
-                                        <span>items solid</span>
+                                        <h2><%= numTotal %></h2>
+                                        <span>Número total de avaliações</span>
                                     </div>
-                                </div>
-                                <div class="overview-chart">
-                                    <canvas id="widgetChart2"></canvas>
                                 </div>
                             </div>
                         </div>
@@ -60,12 +45,9 @@
                                         <i class="zmdi zmdi-calendar-note"></i>
                                     </div>
                                     <div class="text">
-                                        <h2>1,086</h2>
-                                        <span>this week</span>
+                                        <h2><%= numLikes %></h2>
+                                        <span>Avaliações positivas de respostas</span>
                                     </div>
-                                </div>
-                                <div class="overview-chart">
-                                    <canvas id="widgetChart3"></canvas>
                                 </div>
                             </div>
                         </div>
@@ -78,12 +60,9 @@
                                         <i class="zmdi zmdi-money"></i>
                                     </div>
                                     <div class="text">
-                                        <h2>$1,060,386</h2>
-                                        <span>total earnings</span>
+                                        <h2><%= numDislikes %></h2>
+                                        <span>Avaliações negativas de respostas</span>
                                     </div>
-                                </div>
-                                <div class="overview-chart">
-                                    <canvas id="widgetChart4"></canvas>
                                 </div>
                             </div>
                         </div>
@@ -127,17 +106,17 @@
                     <div class="col-lg-6">
                         <div class="au-card chart-percent-card">
                             <div class="au-card-inner">
-                                <h3 class="title-2 tm-b-5">Satisfação das respostas em %</h3>
+                                <h3 class="title-2 tm-b-5">Avaliação das respostas em %</h3>
                                 <div class="row no-gutters">
                                     <div class="col-xl-6">
                                         <div class="chart-note-wrap">
                                             <div class="chart-note mr-0 d-block">
                                                 <span class="dot dot--blue"></span>
-                                                <span>products</span>
+                                                <span>Positivas</span>
                                             </div>
                                             <div class="chart-note mr-0 d-block">
                                                 <span class="dot dot--red"></span>
-                                                <span>services</span>
+                                                <span>Negativas</span>
                                             </div>
                                         </div>
                                     </div>
@@ -158,67 +137,35 @@
                             <table class="table table-borderless table-data3">
                                 <thead>
                                     <tr>
-                                        <th>Data</th>
                                         <th>Pergunta</th>
                                         <th>Resposta</th>
                                         <th>Avaliação <br>média</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>2018-09-29 05:57</td>
-                                        <td>Vamos, vamos corinthians essa noite teremos que ganhar</td>
-                                        <td>Vamos, vamos corinthians essa noite teremos que ganhar pao com ovo pao </td>
-                                        <td class="process">4.2</td>
-                                    </tr>
-                                    <tr>
-                                        <td>2018-09-29 05:57</td>
-                                        <td>Vamos, vamos corinthians essa noite teremos que ganhar</td>
-                                        <td>Vamos, vamos corinthians essa noite teremos que ganhar pao com ovo pao </td>
-                                        <td class="process">4.2</td>
-                                    </tr>
-                                    <tr>
-                                        <td>2018-09-29 05:57</td>
-                                        <td>Vamos, vamos corinthians essa noite teremos que ganhar</td>
-                                        <td>Vamos, vamos corinthians essa noite teremos que ganhar pao com ovo pao </td>
-                                        <td class="denied">2.8</td>
-                                    </tr>
-                                    <tr>
-                                        <td>2018-09-29 05:57</td>
+                                    <% if (typeof error === "string") {%>
+                                    
+                                    <% } else { %>
+                                    <% results.forEach(row =>{ %>
+                                        <tr class="tr-shadow" data-id="<%= row.id %>" data-pergunta="<%= row.data().enunciado_pergunta %>" data-resposta="<%= row.data().resposta_pergunta %>">
+                                            <td><%= row.data().enunciado_pergunta %></td>
+                                            <td><%= row.data().resposta_pergunta %></td>
+                                            <td class="process" style="margin-bottom: 3px;">4.2</td>
+                                        </tr>
+                                        <tr class="spacer"></tr>
+                                    <% }); }%>
+                                    <!-- <tr>
                                         <td>Vamos, vamos corinthians essa noite teremos que ganhar</td>
                                         <td>Vamos, vamos corinthians essa noite teremos que ganhar pao com ovo pao </td>
                                         <td class="denied">2.8</td>
-                                    </tr>
-                                    <tr>
-                                        <td>2018-09-29 05:57</td>
-                                        <td>Vamos, vamos corinthians essa noite teremos que ganhar</td>
-                                        <td>Vamos, vamos corinthians essa noite teremos que ganhar pao com ovo pao </td>
-                                        <td class="process">4.2</td>
-                                    </tr>
-                                    <tr>
-                                        <td>2018-09-29 05:57</td>
-                                        <td>Vamos, vamos corinthians essa noite teremos que ganhar</td>
-                                        <td>Vamos, vamos corinthians essa noite teremos que ganhar pao com ovo pao </td>
-                                        <td class="process">4.2</td>
-                                    </tr>
-                                    <tr>
-                                        <td>2018-09-29 05:57</td>
-                                        <td>Vamos, vamos corinthians essa noite teremos que ganhar</td>
-                                        <td>Vamos, vamos corinthians essa noite teremos que ganhar pao com ovo pao </td>
-                                        <td class="process">4.2</td>
-                                    </tr>
-                                    <tr>
-                                        <td>2018-09-29 05:57</td>
-                                        <td>Vamos, vamos corinthians essa noite teremos que ganhar</td>
-                                        <td>Vamos, vamos corinthians essa noite teremos que ganhar pao com ovo pao </td>
-                                        <td class="process">4.2</td>
-                                    </tr>
+                                    </tr> -->
                                 </tbody>
                             </table>
                         </div>
                     </div>
                 </div>
-                <div class="row">
+
+                <!-- <div class="row">
                     <div class="col-lg-6">
                         <div class="au-card au-card--no-shadow au-card--no-pad m-b-40">
                             <div class="au-card-title" style="background-image:url('images/bg-title-01.jpg');">
@@ -469,6 +416,73 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> -->
+                
+<script src="/vendor/chartjs/Chart.bundle.min.js"></script>
+<script>
+    try {
+    
+    let percentLike = (100* <%= numLikes %>) / <%= numTotal %>;
+    let percentDislike = 100 - percentLike;
 
+    console.log(percentLike);
+    // Percent Chart
+    var ctx = document.getElementById("percent-chart");
+    if (ctx) {
+        ctx.height = 280;
+        var myChart = new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+            datasets: [
+            {
+                label: "My First dataset",
+                data: [percentLike, percentDislike],
+                backgroundColor: [
+                '#00b5e9',
+                '#fa4251'
+                ],
+                hoverBackgroundColor: [
+                '#00b5e9',
+                '#fa4251'
+                ],
+                borderWidth: [
+                0, 0
+                ],
+                hoverBorderColor: [
+                'transparent',
+                'transparent'
+                ]
+            }
+            ],
+            labels: [
+            'Positivas',
+            'Negativas'
+            ]
+        },
+        options: {
+            maintainAspectRatio: false,
+            responsive: true,
+            cutoutPercentage: 55,
+            animation: {
+            animateScale: true,
+            animateRotate: true
+            },
+            legend: {
+            display: false
+            },
+            tooltips: {
+            titleFontFamily: "Poppins",
+            xPadding: 15,
+            yPadding: 10,
+            caretPadding: 0,
+            bodyFontSize: 16
+            }
+        }
+        });
+    }
+
+    } catch (error) {
+    console.log(error);
+    }
+</script>
 <%- include("inc/footer") -%>
