@@ -391,11 +391,37 @@ router.use(function(req, res, next){
 /* GET home page. */
 router.get('/', function(req, res, next) {
   
-  res.render("index", {
-    title: 'Projeto Chazelle',
-    user: req.session.user
-  });
+  let perg = new pergunta();
+
+  console.log(req.session.user);
+
+  pergunta.getByLimit(db, req.session.user.CNPJ_empresa, 5).then(results =>{
+
+    console.log(results);
+    perg.count(db, req.session.user.CNPJ_empresa).then((resultsCount)=>{
+
+      res.render("index", {
+        title: "Projeto Chazelle",
+        results,
+        numPerguntas: resultsCount.numPerguntas,
+        numLikes: resultsCount.numLikes,
+        numDislikes: resultsCount.numDislikes,
+        numTotal: resultsCount.numTotal,
+        user: req.session.user
+      });
+
+    }).catch(()=>{
+
+      res.render("index", {
+        title: "Projeto Chazelle",
+        results,
+        user: req.session.user
+      });
+
+    });
   
+  });
+
 });
 
 router.get("/index", function(req, res, next){
@@ -418,8 +444,8 @@ router.get("/index", function(req, res, next){
         user: req.session.user
       });
 
-    }).catch(()=>{
-
+    }).catch((err)=>{
+      console.log(err);
       res.render("index", {
         title: "Projeto Chazelle",
         results,

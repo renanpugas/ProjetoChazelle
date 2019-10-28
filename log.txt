@@ -133,3 +133,7 @@ obs: delete apenas na classe Funcionario
 - Consertado bug na página listar perguntas quando não se tinha nenhuma pergunta cadastrada
 - Tela inicial mostrando numero de perguntas cadastradas, total de avaliações e total de avaliações positivas e negativas
 - Tela inicial trazendo 5 perguntas cadastradas
+
+#28/10
+- Bugs consertados na tela inicial quando não se havia nenhuma pergunta cadastrada
+- Modificações no CSS da página inicial

@@ -33,7 +33,7 @@ class Pergunta{
                   reject("No such document!");
                 }
               })
-              .catch(function(error) {
+              .catch((error)=> {
                   console.log(error);
                   reject(error);
               });

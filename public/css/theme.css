@@ -3127,11 +3127,12 @@ section {
     -moz-border-radius: 10px;
     border-radius: 10px;
     padding: 30px;
-    padding-bottom: 0;
+    padding-bottom: 10px;
     -webkit-box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.1);
     -moz-box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.1);
     box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.1);
     margin-bottom: 40px;
+    height: 85%;
 }
 
 @media (min-width: 992px) and (max-width: 1519px) {
@@ -3142,9 +3143,9 @@ section {
 }
 
 .overview-item--c1 {
-    background-image: -moz-linear-gradient(90deg, #3f5efb 0%, #fc466b 100%);
-    background-image: -webkit-linear-gradient(90deg, #3f5efb 0%, #fc466b 100%);
-    background-image: -ms-linear-gradient(90deg, #3f5efb 0%, #fc466b 100%);
+    background-image: -moz-linear-gradient(90deg, #fc4a1a 0%, #f7b733 100%);
+    background-image: -webkit-linear-gradient(90deg, #fc4a1a 0%, #f7b733 100%);
+    background-image: -ms-linear-gradient(90deg, #fc4a1a 0%, #f7b733 100%);
 }
 
 .overview-item--c2 {
@@ -3154,15 +3155,15 @@ section {
 }
 
 .overview-item--c3 {
-    background-image: -moz-linear-gradient(90deg, #ee0979 0%, #ff6a00 100%);
-    background-image: -webkit-linear-gradient(90deg, #ee0979 0%, #ff6a00 100%);
-    background-image: -ms-linear-gradient(90deg, #ee0979 0%, #ff6a00 100%);
+    background-image: -moz-linear-gradient(90deg, #0052D4 0%, #6FB1FC 100%);
+    background-image: -webkit-linear-gradient(90deg, #0052D4 0%, #6FB1FC 100%);
+    background-image: -ms-linear-gradient(90deg, #0052D4 0%, #6FB1FC 100%);
 }
 
 .overview-item--c4 {
-    background-image: -moz-linear-gradient(90deg, #45b649 0%, #dce35b 100%);
-    background-image: -webkit-linear-gradient(90deg, #45b649 0%, #dce35b 100%);
-    background-image: -ms-linear-gradient(90deg, #45b649 0%, #dce35b 100%);
+    background-image: -moz-linear-gradient(90deg, #c31432 0%, #fc466b 100%);
+    background-image: -webkit-linear-gradient(90deg, #c31432 0%, #fc466b 100%);
+    background-image: -ms-linear-gradient(90deg, #c31432 0%, #fc466b 100%);
 }
 
 .overview-box .icon {
@@ -3207,7 +3208,7 @@ section {
 
 .overview-box .text span {
     font-size: 18px;
-    color: rgba(255, 255, 255, 0.6);
+    color: rgba(255, 255, 255, 1);
 }
 
 @media (min-width: 992px) and (max-width: 1199px) {

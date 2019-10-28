@@ -12,10 +12,14 @@
                             <div class="overview__inner">
                                 <div class="overview-box clearfix">
                                     <div class="icon">
-                                        <i class="zmdi zmdi-account-o"></i>
+                                        <i class="zmdi zmdi-help"></i>
                                     </div>
                                     <div class="text">
-                                        <h2><%= numPerguntas %></h2>
+                                        <% if (typeof error === "string") { %>
+                                            <h2>0</h2>
+                                        <% } else { %>
+                                            <h2><%= numPerguntas %></h2>
+                                        <% } %>
                                         <span>Perguntas cadastradas</span>
                                     </div>
                                 </div>
@@ -27,10 +31,14 @@
                             <div class="overview__inner">
                                 <div class="overview-box clearfix">
                                     <div class="icon">
-                                        <i class="zmdi zmdi-shopping-cart"></i>
+                                        <i class="zmdi zmdi-thumb-up-down"></i>
                                     </div>
                                     <div class="text">
-                                        <h2><%= numTotal %></h2>
+                                        <% if (typeof error === "string") { %>
+                                            <h2 id="numTotal">0</h2>
+                                        <% } else { %>
+                                            <h2 id="numTotal"><%= numTotal %></h2>
+                                        <% } %>
                                         <span>Número total de avaliações</span>
                                     </div>
                                 </div>
@@ -42,10 +50,14 @@
                             <div class="overview__inner">
                                 <div class="overview-box clearfix">
                                     <div class="icon">
-                                        <i class="zmdi zmdi-calendar-note"></i>
+                                        <i class="zmdi zmdi-thumb-up"></i>
                                     </div>
                                     <div class="text">
-                                        <h2><%= numLikes %></h2>
+                                        <% if (typeof error === "string") { %>
+                                            <h2 id="numLikes">0</h2>
+                                        <% } else { %>
+                                            <h2 id="numLikes"><%= numLikes %></h2>
+                                        <% } %>
                                         <span>Avaliações positivas de respostas</span>
                                     </div>
                                 </div>
@@ -57,10 +69,14 @@
                             <div class="overview__inner">
                                 <div class="overview-box clearfix">
                                     <div class="icon">
-                                        <i class="zmdi zmdi-money"></i>
+                                        <i class="zmdi zmdi-thumb-down"></i>
                                     </div>
                                     <div class="text">
-                                        <h2><%= numDislikes %></h2>
+                                        <% if (typeof error === "string") { %>
+                                            <h2>0</h2>
+                                        <% } else { %>
+                                            <h2><%= numDislikes %></h2>
+                                        <% } %>
                                         <span>Avaliações negativas de respostas</span>
                                     </div>
                                 </div>
@@ -69,41 +85,7 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-lg-6">
-                        <div class="au-card recent-report">
-                            <div class="au-card-inner">
-                                <h3 class="title-2">recent reports</h3>
-                                <div class="chart-info">
-                                    <div class="chart-info__left">
-                                        <div class="chart-note">
-                                            <span class="dot dot--blue"></span>
-                                            <span>products</span>
-                                        </div>
-                                        <div class="chart-note mr-0">
-                                            <span class="dot dot--green"></span>
-                                            <span>services</span>
-                                        </div>
-                                    </div>
-                                    <div class="chart-info__right">
-                                        <div class="chart-statis">
-                                            <span class="index incre">
-                                                <i class="zmdi zmdi-long-arrow-up"></i>25%</span>
-                                            <span class="label">products</span>
-                                        </div>
-                                        <div class="chart-statis mr-0">
-                                            <span class="index decre">
-                                                <i class="zmdi zmdi-long-arrow-down"></i>10%</span>
-                                            <span class="label">services</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="recent-report__chart">
-                                    <canvas id="recent-rep-chart"></canvas>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6">
+                    <div class="col-lg-12">
                         <div class="au-card chart-percent-card">
                             <div class="au-card-inner">
                                 <h3 class="title-2 tm-b-5">Avaliação das respostas em %</h3>
@@ -420,12 +402,24 @@
                 
 <script src="/vendor/chartjs/Chart.bundle.min.js"></script>
 <script>
+    
     try {
     
-    let percentLike = (100* <%= numLikes %>) / <%= numTotal %>;
-    let percentDislike = 100 - percentLike;
+    let percentLike = 0;
+    let percentDislike = 0;
+    let numTotal = parseInt(document.querySelector("#numTotal").innerHTML);
+    let numLikes = parseInt(document.querySelector("#numLikes").innerHTML);
 
+    if(numTotal === 0){
+        percentLike = 50;
+        percentDislike = 50;
+    } else {
+        percentLike = (100* numLikes) / numTotal;
+        percentDislike = 100 - percentLike;
+    }
+    
     console.log(percentLike);
+
     // Percent Chart
     var ctx = document.getElementById("percent-chart");
     if (ctx) {
@@ -482,7 +476,8 @@
     }
 
     } catch (error) {
-    console.log(error);
+        console.log(error);
     }
+    
 </script>
 <%- include("inc/footer") -%>
