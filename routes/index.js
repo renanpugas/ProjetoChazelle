@@ -592,6 +592,17 @@ router.get("/editarPergunta", function(req, res, next){
 
 });
 
+router.get("/editarFuncionario", function(req, res, next){
+  res.render("edtFuncionario", {
+    title: 'Projeto Chazelle',
+    user: req.session.user,
+    nome: req.query.nome,
+    email: req.query.email,
+    cpf: req.query.cpf
+  });
+
+});
+
 router.get('/ola', function(req, res, next) {
 
   // let func = new Funcionario();
@@ -766,13 +777,11 @@ router.post("/funcionario/:id", function(req, res, next){
 
   let func = new Funcionario();
 
-  func.save(db, req.params.id, {
-    CNPJ_empresa: req.body.CNPJ,
-    CPF_funcionario: req.body.cpf,
-    isAdministrator_funcionario: req.body.isAdministrator,
-    nome_funcionario: req.body.nome
+  func.update(db, req.params.id, {
+    nome_funcionario: req.body.nome,
+    email_funcionario: req.body.email
   }).then(result =>{
-    res.send("funfou");
+    res.redirect("/funcionarios");
   }).catch(err =>{
     console.log(err);
     res.send(err);

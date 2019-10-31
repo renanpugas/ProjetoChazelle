@@ -18,7 +18,7 @@
 
     tr.querySelector(".btn-edit").addEventListener("click", e=>{
 
-        window.location.href = `/editarPergunta/?id=${tr.dataset.id}&enunciado=${tr.dataset.pergunta}&resposta=${tr.dataset.resposta}`;
+        window.location.href = `/editarFuncionario/?nome=${tr.dataset.nome}&email=${tr.dataset.email}&cpf=${tr.dataset.cpf}`;
 
     });
 
