@@ -8,7 +8,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="overview-wrap">
-                        <h2 class="title-1">Cadastrar Funcionário</h2>
+                        <h2 class="title-1">Editar Funcionário</h2>
                     </div>
                 </div>
             </div>
@@ -19,37 +19,42 @@
                                         <%= error %>
                                 </div>
                             <% } %>
-                            <strong>Preencha o formulário para cadastrar um funcionário para a empresa</strong>
+                            <% if (typeof success === "string") {%>
+                                <div class="alert alert-success">
+                                        <%= success %>
+                                </div>
+                            <% } %>
+                            <strong>Preencha o formulário para alterar informações sobre um funcionário</strong>
                         </div>
                         <div class="card-body card-block" style="padding-bottom: 0.2rem">
                             <form action="/funcionario/<%= cpf %>" method="post" class="form-horizontal">
-                                <div class="row form-group">
-                                    <div class="col col-md-3">
-                                        <label for="text-input" class=" form-control-label">Nome</label>
-                                    </div>
-                                    <div class="col-12 col-md-9">
-                                        <input type="text" id="nome" name="nome" placeholder="Digite o nome do funcionário" class="form-control" value="<%= nome %>"required>
-                                    </div>
-                                </div>
-                                <div class="row form-group">
-                                    <div class="col col-md-3">
-                                        <label for="email-input" class=" form-control-label">Email</label>
-                                    </div>
-                                    <div class="col-12 col-md-9">
-                                        <input type="email" id="email" name="email" placeholder="Digite o email do funcionário" class="form-control" value="<%= email %>" required>
-                                    </div>
-                                </div>
-                                <div class="row form-group">
-                                        <div class="card-footer col-12 col-md-9">     
-                                            <button type="submit" class="btn btn-primary btn-sm">
-                                                <i class="fa fa-chevron-right"></i> Enviar
-                                            </button>
-                                            <button type="reset" class="btn btn-danger btn-sm">
-                                                <i class="fa fa-ban"></i> Limpar Campos
-                                            </button>
+                                    <div class="row form-group">
+                                        <div class="col col-md-3">
+                                            <label for="text-input" class=" form-control-label">Nome</label>
                                         </div>
-                                </div>
-                            </form>
+                                        <div class="col-12 col-md-9">
+                                            <input type="text" id="nome" name="nome" placeholder="Digite o nome do funcionário" class="form-control" value="<%= nome %>"required>
+                                        </div>
+                                    </div>
+                                    <div class="row form-group">
+                                        <div class="col col-md-3">
+                                            <label for="email-input" class=" form-control-label">Email</label>
+                                        </div>
+                                        <div class="col-12 col-md-9">
+                                            <input type="email" id="email" name="email" placeholder="Digite o email do funcionário" class="form-control" value="<%= email %>" required>
+                                        </div>
+                                    </div>
+                                    <div class="row form-group">
+                                            <div class="card-footer col-12 col-md-9">     
+                                                <button type="submit" class="btn btn-primary btn-sm">
+                                                    <i class="fa fa-chevron-right"></i> Enviar
+                                                </button>
+                                                <button type="reset" class="btn btn-danger btn-sm">
+                                                    <i class="fa fa-ban"></i> Limpar Campos
+                                                </button>
+                                            </div>
+                                    </div>
+                                </form>
                         </div>
                         
                     </div>

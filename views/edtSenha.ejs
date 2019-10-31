@@ -1,0 +1,63 @@
+<%- include("inc/head") -%>
+<%- include("inc/header") -%>
+
+<!-- MAIN CONTENT-->
+<div class="main-content">
+    <div class="section__content section__content--p30">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="overview-wrap">
+                        <h2 class="title-1">Alterar Senha</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="card m-t-20">
+                        <div class="card-header">
+                            <% if (typeof error === "string") {%>
+                                <div class="alert alert-danger">
+                                        <%= error %>
+                                </div>
+                            <% } %>
+                            <% if (typeof success === "string") {%>
+                                <div class="alert alert-success">
+                                        <%= success %>
+                                </div>
+                            <% } %>
+                            <strong>Preencha o formulário para alterar sua senha</strong>
+                        </div>
+                        <div class="card-body card-block" style="padding-bottom: 0.2rem">
+                            <form action="/senha/<%= user.CPF_funcionario %>" method="post" class="form-horizontal">
+                                <div class="row form-group">
+                                    <div class="col col-md-3">
+                                        <label for="senhaAntiga" class=" form-control-label">Senha Antiga</label>
+                                    </div>
+                                    <div class="col-12 col-md-9">
+                                        <input type="password" id="senhaAntiga" name="senhaAntiga" placeholder="Digite sua senha antiga" class="form-control"  autocomplete="off" required>
+                                    </div>
+                                </div>
+                                <div class="row form-group">
+                                    <div class="col col-md-3">
+                                        <label for="senhaNova" class=" form-control-label">Digite a nova senha</label>
+                                    </div>
+                                    <div class="col-12 col-md-9">
+                                        <input type="password" id="senhaNova" name="senhaNova" placeholder="Digite a nova senha" class="form-control" autocomplete="off" required>
+                                    </div>
+                                </div>
+                                <div class="row form-group">
+                                    <div class="card-footer col-12 col-md-9">     
+                                        <button type="submit" class="btn btn-primary btn-sm">
+                                            <i class="fa fa-chevron-right"></i> Enviar
+                                        </button>
+                                        <button type="reset" class="btn btn-danger btn-sm">
+                                            <i class="fa fa-ban"></i> Limpar Campos
+                                        </button>
+                                    </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+            </div>
+
+<script src="js/cadFuncionario.js"></script>
+<%- include("inc/footer") -%>

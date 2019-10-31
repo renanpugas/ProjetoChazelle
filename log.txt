@@ -137,3 +137,10 @@ obs: delete apenas na classe Funcionario
 #28/10
 - Bugs consertados na tela inicial quando não se havia nenhuma pergunta cadastrada
 - Modificações no CSS da página inicial
+
+#29/10
+- Barra de navegação alterada
+- Página editar funcionário criada
+
+#30/10
+- Página alterar senha criada
