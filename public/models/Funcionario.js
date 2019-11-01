@@ -1,8 +1,6 @@
 const validator = require("validator");
 
 class Funcionario{
-
-    constructor(){}
     
     static checkLogin(db, email, senha){
 
@@ -50,7 +48,6 @@ class Funcionario{
                   .catch(function(error) {
                     reject("Error getting document: ", error);
                   });
-
 
         });
 
@@ -156,6 +153,43 @@ class Funcionario{
         });
 
     }
+
+    updateSenha(db, senhaAntiga, senhaNova, userCPF){
+
+        return new Promise((resolve, reject)=>{
+
+            if(senhaNova.length < 6){ 
+                reject("A senha deve conter no mínimo 6 caracteres");
+                return;
+            } else {
+
+                let results = db.database().collection("Funcionarios")
+                .where("senha_funcionario", "==", senhaAntiga)
+                .where("CPF_funcionario", "==", userCPF);
+
+                //console.log(results);
+            
+                results.get().then((querySnapshot)=> {
+                    if (querySnapshot.size > 0) {
+                      // Contents of first document
+                      this.update(db, userCPF, { senha_funcionario: senhaNova }).then(()=>{
+                        resolve();
+                      }).catch((error)=>{
+                        reject("Erro");
+                      });
+                    } else {
+                      reject("Senha antiga incorreta!");
+                    }
+                  })
+                  .catch((error)=> {
+                    reject("Erro");
+                  });
+
+            }
+
+        });
+
+    };
     
 }
 

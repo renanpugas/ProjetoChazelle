@@ -2,80 +2,80 @@
 - Criacao do Projeto
 
 #08/07
-- Integração do Banco de Dados com o projeto
-- Criação das classes model
+- Integraï¿½ï¿½o do Banco de Dados com o projeto
+- Criaï¿½ï¿½o das classes model
 
 #09/07
-- Criação dos métodos save e get das classes model Empresa e Funcionario
-- Configuração das rotas de cadastro e consulta referentes a Empresa e Funcionario
+- Criaï¿½ï¿½o dos mï¿½todos save e get das classes model Empresa e Funcionario
+- Configuraï¿½ï¿½o das rotas de cadastro e consulta referentes a Empresa e Funcionario
 
 #10/07
-- Criação dos métodos update, delete e getAll nas classes model Empresa e Funcionario
+- Criaï¿½ï¿½o dos mï¿½todos update, delete e getAll nas classes model Empresa e Funcionario
 obs: delete apenas na classe Funcionario
 
 #11/07
-- Criação dos métodos getAllPerguntas, save, update e delete na classe Pergunta
-- Criação da rota get para pegar todas as perguntas de uma determinada empresa
+- Criaï¿½ï¿½o dos mï¿½todos getAllPerguntas, save, update e delete na classe Pergunta
+- Criaï¿½ï¿½o da rota get para pegar todas as perguntas de uma determinada empresa
 
 #15/07
-- Alterações na classe model Pergunta
+- Alteraï¿½ï¿½es na classe model Pergunta
 
 #17/07
-- Criação das rotas para atualização
-- Alteração no método delete das classes model Pergunta e Funcionario
+- Criaï¿½ï¿½o das rotas para atualizaï¿½ï¿½o
+- Alteraï¿½ï¿½o no mï¿½todo delete das classes model Pergunta e Funcionario
 
 #18/07
-- Ajustes nas rotas de criação e alteração
+- Ajustes nas rotas de criaï¿½ï¿½o e alteraï¿½ï¿½o
 
 #19/07
-- Criação rota get para arquivos rive
+- Criaï¿½ï¿½o rota get para arquivos rive
 
 #22/07
 - Testes para substituir valores nos arquivos rive
 
 #23/07
-- Criação de rotas put e delete para arquivos rive
+- Criaï¿½ï¿½o de rotas put e delete para arquivos rive
 
 #24/07
-- Configuração da rota get para arquivos rive (integração com interpretador Rivescript)
+- Configuraï¿½ï¿½o da rota get para arquivos rive (integraï¿½ï¿½o com interpretador Rivescript)
 
 #25/07
 - Testes no layout (home)
 - Ajuste no css do menu lateral e da caixa de pesquisa superior do layout
 
 #29/06
-- Edição da view Login
-- Criação das views Registrar Empresa e Registrar Funcionário
+- Ediï¿½ï¿½o da view Login
+- Criaï¿½ï¿½o das views Registrar Empresa e Registrar Funcionï¿½rio
 
 #30/07
-- Criação das views Cadastrar Funcionário, Listar Funcionários e Editar Funcionário
+- Criaï¿½ï¿½o das views Cadastrar Funcionï¿½rio, Listar Funcionï¿½rios e Editar Funcionï¿½rio
 
 #31/07
-- Criação das views Cadastrar Pergunta, Listar Perguntas e Editar Pergunta
+- Criaï¿½ï¿½o das views Cadastrar Pergunta, Listar Perguntas e Editar Pergunta
 
 #01/08
-- Edição da view Chat
+- Ediï¿½ï¿½o da view Chat
 
 #02/08
-- Integração das views com o programa
+- Integraï¿½ï¿½o das views com o programa
 
 #05/08
-- Integração das views listar Funcionarios, listar Perguntas, cadastrar Funcionario, cadastrar Pergunta e chat com o programa
+- Integraï¿½ï¿½o das views listar Funcionarios, listar Perguntas, cadastrar Funcionario, cadastrar Pergunta e chat com o programa
 
 #06/08
-- Views Lister Funcionarios e Listar Perguntas exibindo informações vindas do banco de dados
-- Integração das views Login, Registrar Empresa e Registrar funcionário com o programa
+- Views Lister Funcionarios e Listar Perguntas exibindo informaï¿½ï¿½es vindas do banco de dados
+- Integraï¿½ï¿½o das views Login, Registrar Empresa e Registrar funcionï¿½rio com o programa
 
 #07/08
-- Criação de sessões no projeto
-- Implementação do login
+- Criaï¿½ï¿½o de sessï¿½es no projeto
+- Implementaï¿½ï¿½o do login
 
 #08/08
-- View Cadastrar Funcionario cadastrando informações no banco de dados
+- View Cadastrar Funcionario cadastrando informaï¿½ï¿½es no banco de dados
 
 #09/08
-- Restrição de acesso a todas as paginas
-- Criação da rota de chat
+- Restriï¿½ï¿½o de acesso a todas as paginas
+- Criaï¿½ï¿½o da rota de chat
 - View Funcionarios trazendo do banco de dados apenas os funcionarios referentes a empresa do usuario logado
 
 #12/08
@@ -83,29 +83,29 @@ obs: delete apenas na classe Funcionario
 - View Perguntas trazendo do banco de dados apenas as perguntas referentes a empresa do usuario logado
 
 #13/08
-- Cadastro de novos usuários e empresas funcionando
+- Cadastro de novos usuï¿½rios e empresas funcionando
 
 #15/08
-- Começo de ajustes na view Chabot 
+- Comeï¿½o de ajustes na view Chabot 
 
 #19/08
 - View Chatbot recebendo e enviando mensagens
 
 #20/08
-- Scroll automático configurado na view Chatbot
+- Scroll automï¿½tico configurado na view Chatbot
 
 #21/08
-- Adicionado eventos de clique nos botões de like e dislike na view Chatbot
+- Adicionado eventos de clique nos botï¿½es de like e dislike na view Chatbot
 
 #22/08
-- View listarFuncionarios realizando exclusão
+- View listarFuncionarios realizando exclusï¿½o
 
 #27/08
-- View listarPerguntas realizando exclusão
+- View listarPerguntas realizando exclusï¿½o
 
 #02/09
-- Criação view editarPergunta
-- Criação rota editarPergunta
+- Criaï¿½ï¿½o view editarPergunta
+- Criaï¿½ï¿½o rota editarPergunta
 - View editarPergunta recebendo dados
 
 #03/09
@@ -115,7 +115,7 @@ obs: delete apenas na classe Funcionario
 - View cadastrarPergunta adicionando perguntas no arquivo rive
 
 #09/09
-- View cadastrarPergunta adicionando código rive da pergunta no banco de dados
+- View cadastrarPergunta adicionando cï¿½digo rive da pergunta no banco de dados
 
 #12/09
 - Ajustes na rota chat
@@ -124,16 +124,26 @@ obs: delete apenas na classe Funcionario
 - Rotas Rive sendo substituidas por uma classe Rive
 
 #10/10
-- Botões de like e dislike funcionando no chat
+- Botï¿½es de like e dislike funcionando no chat
 
 #17/10
-- Adicionado validação de dados para usuarios e perguntas
+- Adicionado validaï¿½ï¿½o de dados para usuarios e perguntas
 
 #27/10
-- Consertado bug na página listar perguntas quando não se tinha nenhuma pergunta cadastrada
-- Tela inicial mostrando numero de perguntas cadastradas, total de avaliações e total de avaliações positivas e negativas
+- Consertado bug na pï¿½gina listar perguntas quando nï¿½o se tinha nenhuma pergunta cadastrada
+- Tela inicial mostrando numero de perguntas cadastradas, total de avaliaï¿½ï¿½es e total de avaliaï¿½ï¿½es positivas e negativas
 - Tela inicial trazendo 5 perguntas cadastradas
 
 #28/10
-- Bugs consertados na tela inicial quando não se havia nenhuma pergunta cadastrada
-- Modificações no CSS da página inicial
+- Bugs consertados na tela inicial quando nï¿½o se havia nenhuma pergunta cadastrada
+- Modificaï¿½ï¿½es no CSS da pï¿½gina inicial
+
+#29/10
+- Barra de navegaï¿½ï¿½o alterada
+- Pï¿½gina editar funcionï¿½rio criada
+
+#30/10
+- Pï¿½gina alterar senha criada
+
+#31/10
+- AlteraÃ§Ãµes no menu superior

@@ -592,6 +592,27 @@ router.get("/editarPergunta", function(req, res, next){
 
 });
 
+router.get("/editarFuncionario", function(req, res, next){
+  
+  res.render("edtFuncionario", {
+    title: 'Editar Funcionário',
+    user: req.session.user,
+    nome: req.query.nome,
+    email: req.query.email,
+    cpf: req.query.cpf
+  });
+
+});
+
+router.get("/editarSenha", function(req, res, next){
+  
+  res.render("edtSenha", {
+    title: "Alterar Senha",
+    user: req.session.user
+  });
+
+})
+
 router.get('/ola', function(req, res, next) {
 
   // let func = new Funcionario();
@@ -766,16 +787,31 @@ router.post("/funcionario/:id", function(req, res, next){
 
   let func = new Funcionario();
 
-  func.save(db, req.params.id, {
-    CNPJ_empresa: req.body.CNPJ,
-    CPF_funcionario: req.body.cpf,
-    isAdministrator_funcionario: req.body.isAdministrator,
-    nome_funcionario: req.body.nome
+  func.update(db, req.params.id, {
+    nome_funcionario: req.body.nome,
+    email_funcionario: req.body.email
   }).then(result =>{
-    res.send("funfou");
+    console.log(result);
+    res.render("edtFuncionario", {
+      title: "Editar Funcionário",
+      cpf: req.session.user.CPF_funcionario,
+      nome: req.body.nome,
+      email: req.body.email,
+      user: req.session.user,
+      success: "Dados editados com sucesso!"
+    });
+
   }).catch(err =>{
-    console.log(err);
-    res.send(err);
+
+    res.render("edtFuncionario", {
+      title: "Editar Funcionário",
+      user: req.session.user,
+      cpf: req.session.user.CPF_funcionario,
+      nome: req.session.user.nome_funcionario,
+      email: req.session.user.email_funcionario,
+      error: err
+    });
+    
   });
 
 });
@@ -825,6 +861,30 @@ router.post("/pergunta/:id", function(req, res, next){
   }).catch((err)=>{
 
     console.log(error);
+
+  });
+
+});
+
+router.post("/senha/:cpf", function(req, res, next){
+
+  let func = new Funcionario();
+
+  func.updateSenha(db, req.body.senhaAntiga, req.body.senhaNova, req.params.cpf).then(()=>{
+
+    res.render("edtSenha", {
+      title: "Editar Senha",
+      user: req.session.user,
+      success: "Senha alterada com sucesso!"
+    });
+
+  }).catch((error)=>{
+
+    res.render("edtSenha", {
+      title: "Editar Senha",
+      user: req.session.user,
+      error
+    });
 
   });
 
