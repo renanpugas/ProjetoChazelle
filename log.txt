@@ -135,6 +135,7 @@ obs: delete apenas na classe Funcionario
 - Tela inicial trazendo 5 perguntas cadastradas
 
 #28/10
+<<<<<<< HEAD
 - Bugs consertados na tela inicial quando n�o se havia nenhuma pergunta cadastrada
 - Modifica��es no CSS da p�gina inicial
 
@@ -147,3 +148,17 @@ obs: delete apenas na classe Funcionario
 
 #31/10
 - Alterações no menu superior
+=======
+- Bugs consertados na tela inicial quando n�o se havia nenhuma pergunta cadastrada
+- Modifica��es no CSS da p�gina inicial
+
+#29/10
+- Barra de navega��o alterada
+- P�gina editar funcion�rio criada
+
+#30/10
+- P�gina alterar senha criada
+>>>>>>> 07864b0a34667e49e229b70cb1979e42e687419a
+
+#31/10
+- Bugs consertados
