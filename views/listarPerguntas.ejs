@@ -50,7 +50,8 @@
                                 <tr>
                                     <th>Pergunta</th>
                                     <th>Resposta</th>
-                                    <th>Avaliação Média</th>
+                                    <th>Likes</th>
+                                    <th>Dislikes</th>
                                     <th>Opções</th>
                                 </tr>
                             </thead>
@@ -63,7 +64,8 @@
                                 <tr class="tr-shadow" data-id="<%= row.id %>" data-pergunta="<%= row.data().enunciado_pergunta %>" data-resposta="<%= row.data().resposta_pergunta %>">
                                     <td><%= row.data().enunciado_pergunta %></td>
                                     <td><%= row.data().resposta_pergunta %></td>
-                                    <td class="process">4.2</td>
+                                    <td><%= row.data().likes_pergunta %></td>
+                                    <td><%= row.data().dislikes_pergunta %></td>
                                     <td>
                                         <div class="table-data-feature">
                                             <button class="item btn-edit" data-toggle="tooltip" data-placement="top" title="" data-original-title="Editar">

@@ -802,13 +802,13 @@ router.post("/funcionario/:id", function(req, res, next){
     });
 
   }).catch(err =>{
-
+    console.log(err);
     res.render("edtFuncionario", {
       title: "Editar Funcionário",
       user: req.session.user,
-      cpf: req.session.user.CPF_funcionario,
-      nome: req.session.user.nome_funcionario,
-      email: req.session.user.email_funcionario,
+      cpf: req.params.id,
+      nome: req.body.nome,
+      email: req.body.email,
       error: err
     });
     
