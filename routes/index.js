@@ -346,6 +346,11 @@ router.post("/registrarEmpresa", function(req, res, next){
 
       // req.session.user = req.session.funcionario,
 
+      fs.appendFile(`./rive_files/${req.body.CNPJ}.rive`, "", function (err){
+        if (err) throw err;
+        console.log('Saved!');
+      });
+
       delete req.session.funcionario;
       
       res.redirect("/login");

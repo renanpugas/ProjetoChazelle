@@ -139,11 +139,11 @@ obs: delete apenas na classe Funcionario
 - Modifica��es no CSS da p�gina inicial
 
 #29/10
-- Barra de navega��o alterada
-- P�gina editar funcion�rio criada
+- Barra de navegação alterada
+- Página editar funcionário criada
 
 #30/10
-- P�gina alterar senha criada
+- Página alterar senha criada
 
 #31/10
 - Alterações no menu superior
@@ -153,3 +153,4 @@ obs: delete apenas na classe Funcionario
 
 #07/11
 - Editar funcionarios fazendo validação de dados
+
