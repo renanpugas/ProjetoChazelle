@@ -154,3 +154,6 @@ obs: delete apenas na classe Funcionario
 #07/11
 - Editar funcionarios fazendo validação de dados
 
+#09/11
+- Arquivo rivescript sendo gerado após cadastro de empresa
+- Validação sobre os dados de funcionário ao cadastrar empresa

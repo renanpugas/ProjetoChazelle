@@ -105,6 +105,34 @@ class Empresa{
 
     }
 
+    delete(db, cnpj){
+
+      return new Promise((resolve, reject)=>{
+
+          db.database().collection("Empresas").doc(cnpj).get().then((docSnapshot) => {
+              if (docSnapshot.exists) {
+
+              db.database().collection("Empresas").doc(cnpj).delete()
+                  .then(() =>{
+                      resolve("Dados excluidos com sucesso");
+                  })
+                  .catch(error =>{
+                      console.log(error);
+                      reject(error);
+                  });
+
+              } else {
+                  console.log("Documento não encontrado");
+                  reject("Documento não encontrado");
+
+              } 
+
+          });
+
+      });
+
+  }
+
 
 }
 

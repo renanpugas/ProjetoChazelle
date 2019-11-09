@@ -11,7 +11,13 @@
                                 <img src="/images/icon/logo1.png" alt="CoolAdmin">
                             </a>
                         </div>
+                        <h2 style="text-align: center; margin-bottom: 2rem;">Cadastrar Funcionário</h2>
                         <div class="login-form">
+                            <% if (typeof error === "string") {%>
+                                <div class="alert alert-danger">
+                                        <%= error %>
+                                </div>
+                            <% } %>
                             <form action="/saveFuncionario" method="post">
                                 <div class="form-group">
                                     <label>Nome</label>

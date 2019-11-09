@@ -359,9 +359,17 @@ router.post("/registrarEmpresa", function(req, res, next){
 
       console.log(err);
 
-      res.render("regEmpresa", {
-        err: "Houve um erro ao cadastrar os dados!",
-        title: ""
+      empresa.delete(db, req.body.CNPJ).then(()=>{
+        console.log();
+      }).catch(err=>{
+        console.log(err);
+      });
+
+      delete req.session.funcionario;
+
+      res.render("regFuncionario", {
+        title: "Registrar Funcionário",
+        error: err
       });
 
     });
