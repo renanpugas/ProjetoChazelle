@@ -69,7 +69,7 @@ router.post("/pergunta/dislike", (req, res, next)=>{
 
 router.post("/empresas/rive/:id", function(req, res, next){
 
-  var bot = new rivescript();
+  var bot = new rivescript({utf8: true});
   var resposta = "";
 
   bot.loadFile(`./rive_files/${req.params.id}.rive`).then(loading_done).catch(loading_error);

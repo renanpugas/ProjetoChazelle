@@ -5,6 +5,7 @@ var cnpj = document.querySelector(".cnpj_empresa").outerText;
 document.querySelector(".btn-enviar").addEventListener("click", e=>{
     e.preventDefault();
 
+    let pergunta = inputPergunta.value.toLowerCase();
     let mensagem = document.createElement("div");
     mensagem.classList.add("recei-mess__inner");
     mensagem.innerHTML = `							
@@ -17,12 +18,13 @@ document.querySelector(".btn-enviar").addEventListener("click", e=>{
     
     fetch(`/empresas/rive/${cnpj}`, {
         method: 'post',
-        body: `pergunta=${inputPergunta.value}`,
+        body: `pergunta=${pergunta}`,
         headers: { 'Content-type': 'application/x-www-form-urlencoded' }
       })
     .then(response => response.json()) // retorna uma promise
     .then(json => {
 
+        if(json == "ERR: No Reply Matched") json = "Tente reformular sua pergunta";
         let resposta = document.createElement("div");
         resposta.classList.add("send-mess__inner");
         resposta.dataset.pergunta = inputPergunta.value;
