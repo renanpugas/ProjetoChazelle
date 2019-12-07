@@ -4,8 +4,8 @@ var cnpj = document.querySelector(".cnpj_empresa").outerText;
 
 document.querySelector(".btn-enviar").addEventListener("click", e=>{
     e.preventDefault();
-
-    let pergunta = inputPergunta.value.toLowerCase();
+    
+    let pergunta = inputPergunta.value.toLowerCase().replace(/[.*+?^${}()|[\]\\,;!]/g, "");
     let mensagem = document.createElement("div");
     mensagem.classList.add("recei-mess__inner");
     mensagem.innerHTML = `							

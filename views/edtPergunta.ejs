@@ -8,13 +8,18 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="overview-wrap">
-                            <h2 class="title-1">Cadastrar Pergunta</h2>
+                            <h2 class="title-1">Editar Pergunta</h2>
                         </div>
                     </div>
                 </div>
                 <div class="card m-t-20">
                             <div class="card-header">
-                                <strong>Preencha o formulário para cadastrar uma pergunta para o chatbot da empresa</strong>
+                                <% if (typeof error === "string") {%>
+                                    <div class="alert alert-danger">
+                                            <%= error %>
+                                    </div>
+                                <% } %>
+                                <strong>Preencha o formulário para editar uma pergunta já cadastrada para o chatbot da empresa</strong>
                             </div>
                             <div class="card-body card-block" style="padding-bottom: 0.2rem">
                                 <form action="/pergunta/<%= pergId %>" method="post" class="form-horizontal">
@@ -37,11 +42,6 @@
                                         </div>
                                     </div>
                                     <div class="row form-group">
-                                        <div class="col-12 col-md-9">
-                                            <button type="button" class="btn btn-success">Adicionar nova resposta</button>
-                                        </div>
-                                    </div>
-                                    <div class="row form-group">
                                         <div class="card-footer col-12 col-md-9">     
                                             <button type="submit" class="btn btn-primary btn-sm">
                                                 <i class="fa fa-chevron-right"></i> Enviar
@@ -57,5 +57,28 @@
                 </div>
 
     <script src="/js/edtPergunta.js"></script>
+    <script>
+
+            document.querySelector("textarea#enunciado").addEventListener("keyup", e=>{
+        
+                let textAreaEnunciado = document.querySelector("small.enunciado");
+        
+                let caracteresRestantes = (255 - e.currentTarget.value.length);
+        
+                textAreaEnunciado.innerHTML = `${caracteresRestantes} caracteres restantes`;
+        
+            });
+        
+            document.querySelector("textarea#resposta").addEventListener("keyup", e=>{
+        
+                let textAreaEnunciado = document.querySelector("small.resposta");
+        
+                let caracteresRestantes = (255 - e.currentTarget.value.length);
+        
+                textAreaEnunciado.innerHTML = `${caracteresRestantes} caracteres restantes`;
+        
+            });
+        
+        </script>
 
 <%- include("inc/footer") -%>

@@ -114,6 +114,58 @@ class Pergunta{
         });
 
     }
+
+    searchByPerguntaEditada(db, cnpj, pergunta, idPergunta){
+
+        return new Promise((resolve, reject)=>{
+
+            let pergRef = db.database().collection("Perguntas");
+
+            pergRef.where('CNPJ_pergunta', '==', cnpj).where('enunciado_pergunta', '==', pergunta).get().then((querySnapshot)=>{
+                if (querySnapshot.size > 0) {
+                    if(querySnapshot.docs[0].id === idPergunta){
+                        reject("");
+                    } else {
+                        resolve("Pergunta já cadastrada")
+                    }
+                } else {
+                    reject("No such document!");
+                }
+                })
+            .catch((error)=> {
+                console.log(error);
+                reject("Error getting document: ", error);
+            });
+        });
+
+    }
+
+    searchByRespostaEditada(db, cnpj, resposta, idResposta){
+
+        return new Promise((resolve, reject)=>{
+
+            let pergRef = db.database().collection("Perguntas");
+
+            pergRef.where('CNPJ_pergunta', '==', cnpj).where('resposta_pergunta', '==', resposta).get().then((querySnapshot)=>{
+                if (querySnapshot.size > 0) {
+                    if(querySnapshot.docs[0].id === idResposta){
+                        reject("");
+                    } else {
+                        resolve("Resposta já cadastrada")
+                    }
+                } else {
+                    reject("No such document!");
+                }
+                })
+            .catch((error)=> {
+                console.log(error);
+                reject("Error getting document: ", error);
+            });
+        });
+
+    }
+
+    
     getPergunta(db, id){
 
         return new Promise((resolve, reject) =>{
@@ -139,6 +191,16 @@ class Pergunta{
         return new Promise((resolve, reject)=>{
 
             let dataValidated = undefined;
+
+            if(data.enunciado_pergunta.length < 3){
+                reject("A pergunta deve conter no mínimo 3 caracteres");
+                dataValidated = false;
+                return;
+            } else if(data.resposta_pergunta.length < 3){
+                reject("A resposta deve conter o mínimo 3 caracteres");
+                dataValidated = false;
+                return;
+            }
             
             if(dataValidated === undefined){
                 this.searchByPergunta(db, data.CNPJ_pergunta, data.enunciado_pergunta).then(()=>{
@@ -170,14 +232,39 @@ class Pergunta{
 
         return new Promise((resolve, reject)=>{
 
+            let dataValidated = undefined;
 
-            db.database().collection("Perguntas").doc(id).update(data)
-                .then(results =>{
-                    resolve("Dados atualizados com sucesso");
-                })
-                .catch(err =>{
-                    reject(err);
-                })
+            if(data.enunciado_pergunta.length < 3){
+                reject("A pergunta deve conter no mínimo 3 caracteres");
+                dataValidated = false;
+                return;
+            } else if(data.resposta_pergunta.length < 3){
+                reject("A resposta deve conter o mínimo 3 caracteres");
+                dataValidated = false;
+                return;
+            }
+            
+            if(dataValidated === undefined){
+                this.searchByPerguntaEditada(db, data.CNPJ_pergunta, data.enunciado_pergunta, id).then(()=>{
+                    reject("Já existe uma pergunta cadastrada com o mesmo enunciado");
+                    return;
+                }).catch(()=>{
+                    this.searchByRespostaEditada(db, data.CNPJ_pergunta, data.resposta_pergunta, id).then(()=>{
+                        reject("Já existe uma resposta cadastrada com o mesmo enunciado");
+                        return;
+                    }).catch(()=>{
+                        db.database().collection("Perguntas").doc(id).update(data)
+                        .then(results =>{
+                            resolve("Dados atualizados com sucesso");
+                        })
+                        .catch(err =>{
+                            reject(err);
+                        });
+
+                    });
+                    
+                });  
+            }
 
         });
 
